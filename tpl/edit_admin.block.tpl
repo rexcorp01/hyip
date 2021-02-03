@@ -9,7 +9,7 @@
 
 {foreach from=$fields key=f item=v}
 	{if is_array($v) and !$v.skip and ($v[0] == 'Y')}
-		<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="vendor/ckeditor/ckeditor/ckeditor.js"></script>
 		{break}
 	{/if}
 {/foreach}

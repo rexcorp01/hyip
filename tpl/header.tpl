@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="static/front/css/style.css">
 		<link rel="stylesheet" type="text/css" href="static/front/css/cabinet.css">
 		<script type="text/javascript" src="static/front/js/jquery-1.11.1.js"></script>
-            <script type="text/javascript" src="{$root_url}ckeditor/ckeditor.js"></script>
+            <script type="text/javascript" src="{$root_url}vendor/ckeditor/ckeditor/ckeditor.js"></script>
 	</head>
 	<body><center>
 	{if !$short}

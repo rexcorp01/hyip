@@ -1,8 +1,5 @@
 <?php
 // Templates lib
-
-require_once('smarty3/Smarty.class.php');
-
 global $tpl_page, $tpl_errors;
 
 $tpl_page = new Smarty;

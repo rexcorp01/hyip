@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{$root_url}static/admin/css/jquery.selectBox.css">
     <script type="text/javascript" src="{$root_url}static/admin/js/jquery.selectBox.js"></script>
     
-    <script type="text/javascript" src="{$root_url}ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="{$root_url}vendor/ckeditor/ckeditor/ckeditor.js"></script>
 
     <!--[if lt IE 9]>
         <script type="text/javascript">

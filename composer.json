@@ -1,0 +1,24 @@
+{
+    "authors": [
+        {
+            "name": "Valerii Vasyliev",
+            "homepage": "https://gratta.pro/",
+            "role": "Creator"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "smarty/smarty": "~3.1",
+	"morris/lessql": "~0.3",
+	"phpmailer/phpmailer" : "*",
+	"ckeditor/ckeditor": "4.*",
+	"smarty-gettext/smarty-gettext" : "*",
+	"phpgangsta/googleauthenticator" : "dev-master#1.0.0"
+    },
+    "autoload": {
+	
+    },
+    "autoload-dev": {
+        
+    }
+}

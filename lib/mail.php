@@ -48,11 +48,6 @@ function sendMail($to, $subj, $message, $from = '', $fromname = '')
 	if (!$fromname)
 		$fromname = $_cfg['Sys_SiteName'];
 
-
-		
-	require_once('lib/phpmailer/class.phpmailer.php');
-	require_once('lib/phpmailer/class.smtp.php');
-
 	$mail = new PHPMailer();
 
 	$mail->IsSMTP();

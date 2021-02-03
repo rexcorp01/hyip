@@ -4,6 +4,8 @@
 
 require_once('lib/main.php');
 
+require_once __DIR__."/vendor/autoload.php";
+
 $_GS['https'] = ($_GS['https'] or $_SERVER['HTTP_HTTPS'] or $_SERVER['HTTPS'] or ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'));
 //$_GS['https'] = $_SERVER['HTTP_HTTPS'];
 $_GS['root_url'] = getRootURL($_GS['https']);

@@ -1,4 +1,5 @@
 _config.php
+composer.lock
 tpl_c/*
 logs/*
 upload/*
