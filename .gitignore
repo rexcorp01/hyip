@@ -1,6 +1,13 @@
 _config.php
 composer.lock
+
 tpl_c/*
+!tpl_c/.htaccess
+
 logs/*
+!logs/.htaccess
+
 upload/*
+!upload/.htaccess
+
 vendor/*
