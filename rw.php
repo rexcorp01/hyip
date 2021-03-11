@@ -88,11 +88,11 @@ function moduleToLink($m = '', $chpu = false, $https = 0) // chpu - array(id, te
 			else
 				$r[0] .= '/' . toTranslitURL($m);
 	if ($https < 1)
-		$https = $_GS['https_mode'];
+		$https = $_GS['https_mode'] ?? '';
 	if ($https >= 1)
 		$r['https'] = ($https == 1);
-	elseif (!$r['https'])
-		$r['https'] = $_GS['https'];
+	elseif ((isset($r['https']) && !$r['https']) || !isset($r['https']))
+		$r['https'] = $_GS['https'] ?? '';
 	return (($r['https'] xor $_GS['https']) ? fullURL($r[0], $r['https']) : ((!empty($r[0]) && $r[0] != 'home')?$_GS['root_url']:"").$r[0]);
 }
 
@@ -164,7 +164,7 @@ if ($m != '_config')
 
 	function tplModuleToLink($params)
 	{
-		return moduleToLink($params['module'], $params['chpu'], $params['https']);
+		return moduleToLink($params['module'] ?? '', $params['chpu'] ?? '', $params['https'] ?? '');
 	}
 	$tpl_page->registerPlugin('function', '_link', 'tplModuleToLink');
 	setPage('_selfLink', moduleToLink());

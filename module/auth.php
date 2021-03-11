@@ -43,7 +43,7 @@ if ($_smode < 2) // user mode
 {
     session_start(); // ??? deadlock
 
-    if (($_cfg['Sec_HTTPSMode'] == 1) and !$_GS['https'])
+    if (isset($_cfg['Sec_HTTPSMode']) && ($_cfg['Sec_HTTPSMode'] == 1) and !$_GS['https'])
         goToURL(fullURL('*', true));
 
     $login_link = moduleToLink('account/login');
@@ -90,7 +90,7 @@ if ($_smode < 2) // user mode
 
         // Reflink
 
-        if ($_cfg['Ref_Word'] and (($ref = _GET($_cfg['Ref_Word']) or !_SESSION('_ref'))))
+        if (isset($_cfg['Ref_Word']) && $_cfg['Ref_Word'] and (($ref = _GET($_cfg['Ref_Word']) or !_SESSION('_ref'))))
         {
             if (!_SESSION('_ref'))
                 $ref = exValue(_COOKIE('ref'), $ref);
@@ -107,10 +107,16 @@ if ($_smode < 2) // user mode
         if (($_GS['module'] != 'account/login') and !_uid() and ($_auth > 0)) // auth required!
             goToURL($login_link . '?url=' . urlencode($_GS['uri']));
 
-        if (!$_cfg['Cron_ByHost'] and $_GS['is_local'])
+        if (((isset($_cfg['Cron_ByHost']) && !$_cfg['Cron_ByHost']) || !isset($_cfg['Cron_ByHost'])) and $_GS['is_local'])
             @include_once('cron.php');
     }
-    list($h, $m) = explode(':', $_cfg['UI_DefaultTZ'], 2);
+    
+    if (strpos(($_cfg['UI_DefaultTZ'] ?? ''), ':') !== false) {
+        list($h, $m) = explode(':', ($_cfg['UI_DefaultTZ'] ?? '') , 2);
+    } else {
+        $h = $m = 0;
+    }
+
     $_GS['TZ'] = $h * HS2_UNIX_HOUR + $m * HS2_UNIX_MINUTE;
 
     if (_uid()) // already logged
@@ -133,24 +139,24 @@ if ($_smode < 2) // user mode
                 goToURL($login_link . '?out=ip_changed');
             if ($_user['aSessUniq'] and (_SESSION('_lsess') != $_user['uLSess'])) // !!!session changed!!!
                 goToURL($login_link . '?out=session_changed');
-            $t = exValue($_cfg['Sec_TimeOut'], $_user['aTimeOut']);
+            $t = exValue(($_cfg['Sec_TimeOut'] ?? 0), $_user['aTimeOut']);
             if (!$_GS['is_local'] and ($t > 0)) // !!!auto logout (sess exp)!!!
             {
                 $t = $lt + ($t * HS2_UNIX_MINUTE) - time();
                 if ($t <= 0)
                     goToURL($login_link . '?out=time_out');
             }
-            if (($_cfg['Sec_PassTime'] > 0) and (subStamps($_user['uPTS']) > (0 + $_cfg['Sec_PassTime']) * HS2_UNIX_DAY))
+            if (isset($_cfg['Sec_PassTime']) && ($_cfg['Sec_PassTime'] > 0) and (subStamps($_user['uPTS']) > (0 + $_cfg['Sec_PassTime']) * HS2_UNIX_DAY))
             {
                 if ($_GS['module'] != 'account/change_pass')
                     goToURL(moduleToLink('account/change_pass') . '?need_change');
             }
-            elseif ($_cfg['Sec_ForceReConfig'] and $_user['aNeedReConfig'])
+            elseif (isset($_cfg['Sec_ForceReConfig']) && $_cfg['Sec_ForceReConfig'] and $_user['aNeedReConfig'])
             {
                 if ($_GS['module'] != 'account')
                     goToURL(moduleToLink('account'));
             }
-            elseif ($_cfg['Sys_NeedReConfig'] and ($_user['uLevel'] >= 90))
+            elseif (isset($_cfg['Sys_NeedReConfig']) && $_cfg['Sys_NeedReConfig'] and ($_user['uLevel'] >= 90))
             {
                 if ($_GS['module'] != 'system/admin/setup_main')
                     goToURL(moduleToLink('system/admin/setup_main'));
@@ -170,7 +176,7 @@ if ($_smode < 2) // user mode
     }
     if ($_auth > $_user['uLevel'])
         showInfo('*Denied', $login_link); // !!!Access denied!!!
-    if ($_cfg['Sys_LockSite'] and ($_user['uLevel'] < 90) and ($_GS['module'] != 'account/login'))
+    if (isset($_cfg['Sys_LockSite']) && $_cfg['Sys_LockSite'] and ($_user['uLevel'] < 90) and ($_GS['module'] != 'account/login'))
         goToURL($login_link . valueIf(_uid(), '?out=site_locked'));
     setPage('user', $_user);
 
@@ -216,7 +222,7 @@ if ($_smode < 2) // user mode
 
         // Intro
 
-        if ($_cfg['UI_ShowIntro'] and ($_GS['module'] == 'index') and !get1ElemL($_GS['uri'], '?'))
+        if (isset($_cfg['UI_ShowIntro']) && $_cfg['UI_ShowIntro'] and ($_GS['module'] == 'index') and !get1ElemL($_GS['uri'], '?'))
             if (($_cfg['UI_ShowIntro'] == 2) or _SESSION('show_intro'))
                 if ($i = moduleToLink('udp/intro'))
                 {
