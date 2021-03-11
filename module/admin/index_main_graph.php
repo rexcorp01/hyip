@@ -141,7 +141,7 @@
           WHERE t1.oCTS>='".$prev_year.sprintf("%02d",$prev_month).sprintf("%02d",$prev_day)."000000'
           AND t1.oCTS<='".$today_year.sprintf("%02d",$today_month).sprintf("%02d",$day)."235959'
           AND t1.oState=3
-          ".(($GraphMainOptions['payment_system_select']>0)?" AND t1.ocID='".mysql_escape_string($GraphMainOptions['payment_system_select'])."' ":"")."
+          ".(($GraphMainOptions['payment_system_select']>0)?" AND t1.ocID='".mysqli_real_escape_string($GraphMainOptions['payment_system_select'])."' ":"")."
           AND t1.ocCurrID='".(!empty($GraphMainOptions['currency_select'])?$GraphMainOptions['currency_select']:"USD")."'
           GROUP BY Oper, date_add
           ORDER BY t1.oCTS";

@@ -83,8 +83,8 @@
           WHERE t1.oCTS>='".$a['date_from']."'
           AND t1.oCTS<='".$a['date_to']."'
           AND t1.oState=3
-          AND t1.ocCurrID='".mysql_escape_string($currency_select)."'".
-		  (($payment_system_select>0)?" AND t1.ocID='".mysql_escape_string($payment_system_select)."' ":"").
+          AND t1.ocCurrID='".mysqli_real_escape_string($currency_select)."'".
+		  (($payment_system_select>0)?" AND t1.ocID='".mysqli_real_escape_string($payment_system_select)."' ":"").
 		  "GROUP BY Oper, date_add ORDER BY t1.oCTS";
     $result = $db->_doQuery($sql);
     while($row = $db->fetch($result))

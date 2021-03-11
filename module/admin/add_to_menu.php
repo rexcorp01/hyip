@@ -6,48 +6,48 @@
   $url=str_replace($_GS['root_url'], "", $url);
   $sql="SELECT url
          FROM Admin_menu
-         WHERE admin_id='".mysql_escape_string($uid)."'AND url='".mysql_escape_string($url)."'";
+         WHERE admin_id='".mysqli_real_escape_string($uid)."'AND url='".mysqli_real_escape_string($url)."'";
   $result = $db->_doQuery($sql);
   $row = $db->fetch($result);
   if (!empty($row['url']))
   {
         $sql="DELETE
               FROM Admin_menu
-              WHERE admin_id='".mysql_escape_string($uid)."'
-              AND url='".mysql_escape_string($row['url'])."'";
+              WHERE admin_id='".mysqli_real_escape_string($uid)."'
+              AND url='".mysqli_real_escape_string($row['url'])."'";
         $db->_doQuery($sql);
   }
   else
   {
      $sql="SELECT COUNT(admin_id) AS count
           FROM Admin_menu
-          WHERE admin_id='".mysql_escape_string($uid)."'";
+          WHERE admin_id='".mysqli_real_escape_string($uid)."'";
      $result = $db->_doQuery($sql);
      $row = $db->fetch($result);
      if ($row['count'] == 3)
      {
          $sql="SELECT url
               FROM Admin_menu
-              WHERE admin_id='".mysql_escape_string($uid)."'
+              WHERE admin_id='".mysqli_real_escape_string($uid)."'
               ORDER BY date_add
               LIMIT 0,1";
          $result = $db->_doQuery($sql);
          $row = $db->fetch($result);
          $sql="DELETE
                FROM Admin_menu
-               WHERE admin_id='".mysql_escape_string($uid)."'
-               AND url='".mysql_escape_string($row['url'])."'";
+               WHERE admin_id='".mysqli_real_escape_string($uid)."'
+               AND url='".mysqli_real_escape_string($row['url'])."'";
          $db->_doQuery($sql);
      }
      $sql="REPLACE INTO Admin_menu(admin_id, url, date_add)
-           VALUES('".mysql_escape_string($uid)."', '".mysql_escape_string($url)."', NOW())";
+           VALUES('".mysqli_real_escape_string($uid)."', '".mysqli_real_escape_string($url)."', NOW())";
      $db->_doQuery($sql);
   }
   $admin_links=array();
   $admin_links_list=array();
   $sql="SELECT url
         FROM Admin_menu
-        WHERE admin_id='".mysql_escape_string($uid)."'
+        WHERE admin_id='".mysqli_real_escape_string($uid)."'
         ORDER BY date_add DESC";
   $result = $db->_doQuery($sql);
   while($row = $db->fetch($result))

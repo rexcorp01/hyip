@@ -13,6 +13,52 @@ $_GS['module_dir'] = 'module/';
 
 @include_once($_GS['module_dir'] . '_config.php');
 
+DEFINE('DEBUG_MODE', true);
+
+DEFINE('DEBUG_LOG', true);
+
+define('DEBUG_DISPLAY', false);
+
+if (!defined('_ROOT_DIR_')) {
+    define('_ROOT_DIR_', realpath(dirname(__FILE__))); 
+}
+
+define('_LOG_DIR_', _ROOT_DIR_.'/logs/');
+
+define('_TPL_DIR_', _ROOT_DIR_.'/tpl/');
+
+if (defined('DEBUG_MODE') && DEBUG_MODE) {
+
+ 	error_reporting(E_ALL);
+
+	error_reporting(-1);
+
+	ini_set('error_reporting', E_ALL);
+    
+    
+    if (defined('DEBUG_LOG') && DEBUG_LOG) {
+        
+        ini_set('log_errors', TRUE); // Error logging
+
+        ini_set('error_log', _LOG_DIR_.'php-errors.log'); // Logging file
+
+        //ini_set('log_errors_max_len', 1024); // Logging file size
+    }
+    
+    if (defined('DEBUG_DISPLAY') && !DEBUG_DISPLAY) {
+     
+        ini_set('display_errors', FALSE); // Error display - OFF in production env or real server
+        
+    } else {
+        
+        ini_set('display_errors', TRUE); // Error display - OFF in production env or real server
+    }
+
+} else {
+    
+    error_reporting(0);
+}
+
 function linkToModule($l)
 {
 	global $_rwlinks;
@@ -139,5 +185,3 @@ if ($m != '_config')
 }
 
 require($_GS['script']);
-
-?>

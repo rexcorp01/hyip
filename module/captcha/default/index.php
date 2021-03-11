@@ -1,11 +1,10 @@
 <?php
-
 error_reporting(0);
 
 $type = $_cfg['Captcha_View']; // type of captcha
 if (!$type)
 	$type = 1;
-
+    
 $width = 100;
 $height = 50;
 $length = 4;
@@ -39,11 +38,12 @@ session_write_close();
 
 global $fonts;
 $fonts = array();
-if ($d = opendir("$cdir/$fdir")) 
+
+if ($d = opendir(_ROOT_DIR_."/$cdir/$fdir")) 
 {
 	while (false !== ($f = readdir($d)))
 		if (($f != '.') and ($f != '..'))
-			$fonts[] = "$cdir/$fdir/$f";
+			$fonts[] = _ROOT_DIR_."/$cdir/$fdir/$f";
 	closedir($d);
 }
 
@@ -88,5 +88,3 @@ if (function_exists("imagepng")) {
 	imagejpeg($image);
 }
 imagedestroy($image);
-
-?>

@@ -41,7 +41,7 @@ $admin_links=array();
 
  $sql="SELECT url
        FROM Admin_menu
-       WHERE admin_id='".mysql_escape_string(_uid())."'
+       WHERE admin_id='".mysqli_real_escape_string(_uid())."'
        ORDER BY date_add DESC";
   $result = $db->_doQuery($sql);
   while($row = $db->fetch($result))
@@ -112,7 +112,7 @@ try
                 foreach ($ids as $id)
                 {
                     $sql="INSERT INTO Opers_queue(order_id, type)
-                          VALUES('".mysql_escape_string($id)."', 'complete')";
+                          VALUES('".mysqli_real_escape_string($id)."', 'complete')";
                     $db->_doQuery($sql);
                 }
 				*/
@@ -127,7 +127,7 @@ try
 			    foreach ($ids as $id)
                 {
                     $sql="INSERT INTO Opers_queue(order_id, type)
-                          VALUES('".mysql_escape_string($id)."', 'confirm')";
+                          VALUES('".mysqli_real_escape_string($id)."', 'confirm')";
                     $db->_doQuery($sql);
                 }
 

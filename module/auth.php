@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(0);
+//error_reporting(0);
 //error_reporting(65535);
 
 $_smode = intval(@$_smode); // show mode: 0-user / 1-ajax / 2-bot (cron, captcha..)

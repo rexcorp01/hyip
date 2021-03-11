@@ -80,12 +80,14 @@ function setPage($par, $val, $conv = 3)
 function showPage($templ = '', $module = false, $exit_after = true)
 {
 	global $tpl_page, $tpl_errors, $_IN, $_GS, $_DF, $_cfg;
+
 	if ($module === false)
 		$module = $_GS['module'];
 	setPage('tpl_module', $module);
 	setPage('tpl_vmodule', $_GS['vmodule']);
-	if (file_exists($_GS['module_dir'] . $module . '.php'))
-	{
+
+	if (file_exists(_ROOT_DIR_.'/'.$_GS['module_dir'] . $module . '.php')) {
+	   
 		$t = cutElemR($module, '/');
 		if (!$templ)
 			$templ = $t;
@@ -95,6 +97,7 @@ function showPage($templ = '', $module = false, $exit_after = true)
 			$templ = 'index';
 	setPage('tpl_name', $templ);
 	$templ = $module . '/' . $templ;
+    
 	setPage('tpl_filename', $templ);
 	loadDateFormat($lang);
 	setPage('InputDateFormatLong', trim($_DF[$lang][3]));

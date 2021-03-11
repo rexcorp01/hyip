@@ -87,12 +87,12 @@ function messageSend($from, $frommail, $to, $params, $topic, $text)
             
             
             $sql="INSERT INTO Msg_queue(mail, section, consts, lang, fname, fromname, feed)
-                  VALUES('".mysql_escape_string($u['uMail'])."', 
-                  '".mysql_escape_string('Notice' . valueIf(!$u['uID'] or !$_cfg['Msg_Mode'] or $params['feed'], 'ToMail'))."',
-                  '".mysql_escape_string(serialize($constants))."',
-                  '".mysql_escape_string($u['uLang'])."',
-                  '".mysql_escape_string('e-mails')."', 
-                  '".mysql_escape_string(exValue($usr['uMail'], $frommail))."', 0)";
+                  VALUES('".mysqli_real_escape_string($u['uMail'])."', 
+                  '".mysqli_real_escape_string('Notice' . valueIf(!$u['uID'] or !$_cfg['Msg_Mode'] or $params['feed'], 'ToMail'))."',
+                  '".mysqli_real_escape_string(serialize($constants))."',
+                  '".mysqli_real_escape_string($u['uLang'])."',
+                  '".mysqli_real_escape_string('e-mails')."', 
+                  '".mysqli_real_escape_string(exValue($usr['uMail'], $frommail))."', 0)";
            $db->_doQuery($sql); 
            
            sendMailToUser2($u['uMail'], 'Notice' . valueIf(!$u['uID'] or !$_cfg['Msg_Mode'] or $params['feed'], 'ToMail'),

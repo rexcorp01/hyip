@@ -43,7 +43,7 @@ $admin_links=array();
 
  $sql="SELECT url
        FROM Admin_menu
-       WHERE admin_id='".mysql_escape_string($uid)."'
+       WHERE admin_id='".mysqli_real_escape_string($uid)."'
        ORDER BY date_add DESC";
   $result = $db->_doQuery($sql);
   while($row = $db->fetch($result))

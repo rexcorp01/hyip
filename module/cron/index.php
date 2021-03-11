@@ -55,8 +55,8 @@ while ($row = $db->fetch($result))
     
    $sql="DELETE
          FROM Opers_queue
-         WHERE order_id='".mysql_escape_string($row['order_id'])."'
-         AND type='".mysql_escape_string($row['type'])."'"; 
+         WHERE order_id='".mysqli_real_escape_string($row['order_id'])."'
+         AND type='".mysqli_real_escape_string($row['type'])."'"; 
    $db->_doQuery($sql);  
 }    
 
@@ -71,7 +71,7 @@ while ($row = $db->fetch($result))
    
    $sql="DELETE
          FROM Msg_queue
-         WHERE id='".mysql_escape_string($row['id'])."'"; 
+         WHERE id='".mysqli_real_escape_string($row['id'])."'"; 
    $db->_doQuery($sql); 
 }
 

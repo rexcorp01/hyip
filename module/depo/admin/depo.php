@@ -85,7 +85,7 @@ if (!isset($_GET['add']))
     $_currs=array();
     $sql="SELECT *, IF(t2.cCurrID IS NOT NULL AND t2.cCurrID<>'', t2.cCurrID, t1.cCurrID) AS currency_account
               FROM Currs AS t1
-              LEFT JOIN Wallets AS t2 ON t2.wcID=t1.cID and wuID='".mysql_escape_string($el['duID'])."' 
+              LEFT JOIN Wallets AS t2 ON t2.wcID=t1.cID and wuID='".mysqli_real_escape_string($el['duID'])."' 
               WHERE t1.cDisabled=0
               GROUP BY currency_account";
     $result = $db->_doQuery($sql);

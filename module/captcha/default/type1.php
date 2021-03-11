@@ -85,5 +85,3 @@ for($x=0;$x<$width;$x++){
 }
 
 $image = $image2;
-
-?>

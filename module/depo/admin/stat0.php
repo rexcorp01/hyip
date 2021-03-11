@@ -29,8 +29,8 @@ try
 		}
 		if (!empty($a['cCurr']))
 		{
-			$focurr = " and cCurrID='".mysql_escape_string($a['cCurr'])."'";
-			$fdcurr = " and cCurrID='".mysql_escape_string($a['cCurr'])."'";
+			$focurr = " and cCurrID='".mysqli_real_escape_string($a['cCurr'])."'";
+			$fdcurr = " and cCurrID='".mysqli_real_escape_string($a['cCurr'])."'";
 		}
 		
 		$res = array();
@@ -67,12 +67,12 @@ foreach ($_currs2 as $cid => $c)
 {
 	foreach (array('BONUS', 'PENALTY', 'CASHIN', 'REF', 'GIVE', 'TAKE', 'CALCIN', 'CALCOUT', 'CASHOUT') as $o)
 	{
-		$stat[$cid][$o] = $db->fetch1($db->select("Opers AS t1 LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)) LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr)", "IF(IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) = t2.cCurr, t1.oSum, SUM(ROUND(ROUND(t1.oSum/t4.Val,2)*t3.Val,2)))", "t1.oOper=? and t1.cCurrID='".mysql_escape_string($c)."' and t1.oState=3", array($o)));
+		$stat[$cid][$o] = $db->fetch1($db->select("Opers AS t1 LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)) LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr)", "IF(IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) = t2.cCurr, t1.oSum, SUM(ROUND(ROUND(t1.oSum/t4.Val,2)*t3.Val,2)))", "t1.oOper=? and t1.cCurrID='".mysqli_real_escape_string($c)."' and t1.oState=3", array($o)));
 		$stat[0][$c][$o] += $stat[$cid][$o];
 	}
 
-	$stat[$cid]['GIVE2'] = $db->fetch1($db->select("Opers AS t1 LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)) LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr)", "IF(IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) = t2.cCurr, t1.oSum, SUM(ROUND(ROUND(t1.oSum/t4.Val,2)*t3.Val,2)))", "t1.oOper=? and t1.cCurrID='".mysql_escape_string($c)."' and t1.oState=3 and (t1.oMemo ?%)", array('GIVE', 'Auto')));
-	$stat[$cid]['CASHOUT2'] = $db->fetch1($db->select("Opers AS t1 LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)) LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr)", "IF(IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) = t2.cCurr, t1.oSum, SUM(ROUND(ROUND(t1.oSum/t4.Val,2)*t3.Val,2)))", "t1.oOper=? and t1.cCurrID='".mysql_escape_string($c)."' and t1.oState=2", array('CASHOUT')));
+	$stat[$cid]['GIVE2'] = $db->fetch1($db->select("Opers AS t1 LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)) LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr)", "IF(IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) = t2.cCurr, t1.oSum, SUM(ROUND(ROUND(t1.oSum/t4.Val,2)*t3.Val,2)))", "t1.oOper=? and t1.cCurrID='".mysqli_real_escape_string($c)."' and t1.oState=3 and (t1.oMemo ?%)", array('GIVE', 'Auto')));
+	$stat[$cid]['CASHOUT2'] = $db->fetch1($db->select("Opers AS t1 LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)) LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr)", "IF(IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) = t2.cCurr, t1.oSum, SUM(ROUND(ROUND(t1.oSum/t4.Val,2)*t3.Val,2)))", "t1.oOper=? and t1.cCurrID='".mysqli_real_escape_string($c)."' and t1.oState=2", array('CASHOUT')));
 	$stat[$cid]['DEPO'] = $db->fetch1($db->select('Deps', 'SUM(dZD)', 'dcID=?d and dState=1', array($cid)));
 
     $sql="SELECT 
@@ -83,7 +83,7 @@ foreach ($_currs2 as $cid => $c)
           LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr) 
           WHERE t2.cDisabled=0
           AND t1.oState<>5
-          AND IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)='".mysql_escape_string($c)."'";   
+          AND IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)='".mysqli_real_escape_string($c)."'";   
     $result = $db->_doQuery($sql);
     $o = $db->fetch($result);
 	$stat[$cid]['BAL'] = $o['Z1'];
@@ -96,13 +96,13 @@ foreach ($_currs2 as $cid => $c)
           LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr) 
           WHERE t2.cDisabled=0
           AND t1.dState=1 
-          AND IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)='".mysql_escape_string($c)."'";   
+          AND IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)='".mysqli_real_escape_string($c)."'";   
     $result = $db->_doQuery($sql);
     $o = $db->fetch($result);      
   	$stat[$cid]['LOCK'] = $o['Z2'];
     $stat[0][$c]['LOCK'] += $stat[$cid]['LOCK'];   
               
-    $o = $db->fetch1Row($db->select('Wallets', 'SUM(wBal) AS Z1, SUM(wLock) AS Z2, SUM(wOut) AS Z3', "cCurrID='".mysql_escape_string($c)."'", array()));          
+    $o = $db->fetch1Row($db->select('Wallets', 'SUM(wBal) AS Z1, SUM(wLock) AS Z2, SUM(wOut) AS Z3', "cCurrID='".mysqli_real_escape_string($c)."'", array()));          
     
 	foreach (array('GIVE2', 'CASHOUT2', 'DEPO') as $o)
 		$stat[0][$c][$o] += $stat[$cid][$o];

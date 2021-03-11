@@ -3,7 +3,8 @@
 // var $module must be set!
 
 $_auth = 90;
-require_once('module/auth.php');
+
+require_once(_ROOT_DIR_.'/module/auth.php');
 
 try 
 {
@@ -35,5 +36,3 @@ catch (Exception $e)
 
 setPage('currs2', $_currs2);
 setPage('cfg', $db->fetchIDRows($db->select('Cfg', '*', 'Module=?', array($module)), 'Val', 'Prop'));
-
-?>

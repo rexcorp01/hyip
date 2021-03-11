@@ -86,7 +86,7 @@
           LEFT JOIN Currs AS t2 ON t1.ocID=t2.cID
           WHERE t1.oCTS>='".date("Y", $date_start_project_time).sprintf("%02d",date("n", $date_start_project_time)).sprintf("%02d",date("d", $date_start_project_time))."000000'
           AND t1.oCTS<='".date("Y", $date_end_project_time).sprintf("%02d",date("n", $date_end_project_time)).sprintf("%02d",date("d", $date_end_project_time))."235959'
-          AND t1.ocCurrID='".mysql_escape_string($currency_select)."'
+          AND t1.ocCurrID='".mysqli_real_escape_string($currency_select)."'
           GROUP BY Oper, date_add
           ORDER BY t1.oCTS";
    $result = $db->_doQuery($sql);

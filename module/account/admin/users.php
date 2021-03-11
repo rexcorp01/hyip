@@ -101,7 +101,7 @@ if (is_array($list) && count($list)>0)
         $sql="SELECT t2.cName, t2.cID, IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr) AS currency_account,
              SUM(IF((IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr)= t2.cCurr OR t1.oSumReal>0), IF(t1.oOper='BONUS' OR t1.oOper='CASHIN' OR t1.oOper='EXIN' OR t1.oOper='TRIN' OR t1.oOper='SELL'  OR t1.oOper='REF' OR t1.oOper='TAKE' OR t1.oOper='CALCIN', 1,-1)*IF(t1.oSumReal>0,t1.oSumReal,IF(t1.oSum IS NULL, 0, t1.oSum)), ROUND(ROUND(IF(t1.oOper='BONUS' OR t1.oOper='CASHIN' OR t1.oOper='EXIN' OR t1.oOper='TRIN' OR t1.oOper='SELL'  OR t1.oOper='REF' OR t1.oOper='TAKE' OR t1.oOper='CALCIN', 1,-1)*IF(t1.oSum IS NULL, 0, t1.oSum)/t4.Val,2)*t3.Val,2))) AS wBal
              FROM Currs AS t2
-             LEFT JOIN Opers AS t1 ON t1.ocID=t2.cID AND t1.ouID='".mysql_escape_string($key)."' AND  (t1.oState=3 OR (t1.oOper='CASHOUT' AND t1.oState<>4))
+             LEFT JOIN Opers AS t1 ON t1.ocID=t2.cID AND t1.ouID='".mysqli_real_escape_string($key)."' AND  (t1.oState=3 OR (t1.oOper='CASHOUT' AND t1.oState<>4))
              LEFT JOIN Cfg AS t3 ON t3.Module='Bal' AND t3.Prop=CONCAT('Rate', IF(t1.cCurrID <>'', t1.cCurrID, t2.cCurr))
              LEFT JOIN Cfg AS t4 ON t4.Module='Bal' AND t4.Prop=CONCAT('Rate', t2.cCurr) 
              WHERE t2.cDisabled=0

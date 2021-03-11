@@ -1,6 +1,6 @@
 <?php
 
-require('module/auth.php');
+require (_ROOT_DIR_.'/module/auth.php');
 
 $lang = _RQ('lang');
 $mode = _RQ('mode');
@@ -25,5 +25,3 @@ if (@in_array($lang, $_cfg['UI__Langs']))
 }
 
 goToURL($url);
-
-?>
