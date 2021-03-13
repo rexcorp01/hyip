@@ -34,7 +34,6 @@ function opDepoUSD($sum, $curr)
 
 function opDepoCreate($uid, $cid, $sum, $compnd = 0, $pid = 0, $by_admin = false, $auto = false)
 {    
-//error_reporting(65535);
 	global $db, $_cfg, $_currs, $_currs2;
 	$usr = opReadUser($uid);
 	if (!$usr)
@@ -549,5 +548,3 @@ function depoGetStat()
 	$stat['lastuser'] = $db->fetch1Row($db->select('Users LEFT JOIN AddInfo ON auID=uID', 'uLogin, aCIP', 'uState=1', array(), 'uID desc', 1));
 	return $stat;
 }
-
-?>

@@ -8,6 +8,13 @@ $tpl_page->caching = false;
 $tpl_page->debugging = false;
 $tpl_page->compile_dir = 'tpl_c';
 $tpl_page->template_dir = 'tpl';
+$tpl_page->force_compile = false;
+
+if (!DEBUG_MODE) {
+   $tpl_page->error_unassigned = false;
+} else {
+   $tpl_page->debugging_ctrl = 'URL';
+}
 
 $tpl_errors = array();
 

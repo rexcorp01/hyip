@@ -1,7 +1,7 @@
 {strip}
 {include file='admin/admin/header.tpl' title=$_AT['Users']}
 
-{include file='admin/account/_statuses.tpl'}
+{include file='account/admin/_statuses.tpl'}
 
 {include file='edit.begin.tpl' form='users_filter' url='*'}
 <table class="formatTable">
@@ -53,7 +53,7 @@
 	btns=['setgroup'=>$_AT['Set group'], 'del'=>$_AT['Delete']]
 }
 
-<a href="{$root_url}admin/account/user?add" class="button-blue">{$_AT['Add user']}</a><br>
+<a href="{$root_url}account/admin/user?add" class="button-blue">{$_AT['Add user']}</a><br>
 
 {include file='admin/admin/footer.tpl'}
 {/strip}

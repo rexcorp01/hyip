@@ -1,8 +1,4 @@
 <?php
-
-//error_reporting(0);
-//error_reporting(65535);
-
 $_smode = intval(@$_smode); // show mode: 0-user / 1-ajax / 2-bot (cron, captcha..)
 $_auth = intval(@$_auth); // required access level
 
@@ -166,7 +162,7 @@ if ($_smode < 2) // user mode
         $_SESSION['_lang'] = $_user['uLang'];
         if ($_auth >= 50)
         {
-            if ($_cfg['Sec__IPs'])
+            if (isset($_cfg['Sec__IPs']) && $_cfg['Sec__IPs'])
                 if (!in_array($_GS['client_ip'], $_cfg['Sec__IPs']))
                     showInfo('*Denied', $login_link); // !!!Access denied!!!
             $_GS['TZ'] = 0; // In Admin panel time zone = 0!!!
@@ -252,5 +248,3 @@ $_vcurrs = array(
 foreach ($_currs2 as $cid => $c)
     $_vcurrs[$c['cCurrID']][] = $cid;
 SetPage('vcurrs', $_vcurrs);
-
-?>

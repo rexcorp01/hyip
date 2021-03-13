@@ -1,7 +1,7 @@
 {strip}
 {include file='admin/admin/header.tpl' title=$_AT['Day']}
 
-{include file='admin/calendar/_statuses.tpl'}
+{include file='calendar/admin/_statuses.tpl'}
 
 {include file='edit_admin.tpl'
 	title=$_AT['Day']

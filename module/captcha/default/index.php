@@ -1,6 +1,4 @@
 <?php
-error_reporting(0);
-
 $type = $_cfg['Captcha_View']; // type of captcha
 if (!$type)
 	$type = 1;

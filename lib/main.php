@@ -49,9 +49,6 @@ function xSysStop($message, $and_refresh = false)
 function xTerminal($is_debug = false)
 {
     global $_GS;
-    if ($is_debug) {
-        error_reporting(E_ALL);
-    }
     ob_implicit_flush();
     header("Content-Type: text/plain; charset=\"utf-8\"");
     header("Pragma: no-cache");
@@ -147,13 +144,13 @@ function filterInput($s, $mask = "")
 
 function _arr_val(&$arr, $p)
 {
-    if (!isset($arr)) {
+    if (!$arr) {
         return NULL;
     }
     if (preg_match("/(.+)\\[(.*)\\]/", $p, $a)) {
         return _arr_val($arr[$a[1]], $a[2]);
     }
-    return $arr[$p];
+    return $arr[$p] ?? false;
 }
 
 function isset_IN($p = "btn")
@@ -509,8 +506,6 @@ function chkLic($n = 1)
     }
     return time();
 }
-
-error_reporting(7);
 define("HS2_BR", "<br />");
 define("HS2_NL", "\r\n");
 define("HS2_UNIX_SECOND", 1);

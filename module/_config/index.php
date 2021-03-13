@@ -1,6 +1,4 @@
 <?php
-
-error_reporting(0);
 session_start();
 
 function getMsg()
@@ -39,5 +37,3 @@ foreach (array('login', 'pass', 'setup', 'install', 'modules', 'update') as $m)
 	}
 	
 include("module/_config/modules.php");
-
-?>
