@@ -9,7 +9,7 @@ use function Deployer\{host, task, run, set, get, add, before, after, upload, wr
 set('application', 'h-script');
 
 // Project repository
-set('repository', 'git@github.com:ValeriiVasyliev/h-script.git');
+set('repository', 'git@hscript.github.com:ValeriiVasyliev/h-script.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', false);
@@ -26,7 +26,6 @@ host('hscript_production')
 	->hostname('165.227.139.182')
 	->port(22)
 	->user('deployer')
-	->identityFile('~/.ssh/id_rsa')
 	->forwardAgent(true)
    	->multiplexing(true)
 	->set('deploy_path', '/var/www/hyipcreate-hscript-deployer')
