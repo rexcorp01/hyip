@@ -18,6 +18,8 @@ set('git_tty', false);
 
 set('writable_mode', 'chmod');
 
+set('writable_chmod_mode', '0775');
+
 set('http_group', 'www-data');
 
 set('http_user', 'deployer');
