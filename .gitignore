@@ -1,5 +1,6 @@
 _config.php
 composer.lock
+!module/_config.php
 
 tpl_c/*
 !tpl_c/.htaccess
