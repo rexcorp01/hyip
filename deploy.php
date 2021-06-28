@@ -14,7 +14,7 @@ set('repository', 'git@hscript.github.com:ValeriiVasyliev/h-script.git');
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', false);
 
-set('writable_use_sudo', true);
+//set('writable_use_sudo', true);
 
 set('writable_mode', 'chmod');
 
@@ -45,7 +45,7 @@ set('shared_dirs', [
 set('writable_dirs', [
     'tpl_c',
     'upload',
-    'logs',
+    //'logs',
 ]);
 
 
