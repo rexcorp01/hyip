@@ -45,7 +45,7 @@ set('shared_dirs', [
 set('writable_dirs', [
     //'tpl_c',
     'upload',
-    'logs',
+    //'logs',
 ]);
 
 
