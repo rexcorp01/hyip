@@ -46,8 +46,8 @@ set('shared_dirs', [
 // Writable dirs by web server
 set('writable_dirs', [
     'upload',
-    'tpl_c',
-    'upload'
+    //'tpl_c',
+    //'upload'
 ]);
 
 
