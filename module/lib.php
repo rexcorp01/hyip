@@ -183,9 +183,9 @@ function FilterHTML($string) {
     }
     $string = html_entity_decode($string, ENT_QUOTES, "ISO-8859-1");
     // convert decimal
-    $string = preg_replace('/&#(\d+)/me', "chr(\\1)", $string); // decimal notation
+    $string = preg_replace('/&#(\d+)/m', "chr(\\1)", $string); // decimal notation
     // convert hex
-    $string = preg_replace('/&#x([a-f0-9]+)/mei', "chr(0x\\1)", $string); // hex notation
+    $string = preg_replace('/&#x([a-f0-9]+)/mi', "chr(0x\\1)", $string); // hex notation
     //$string = html_entity_decode($string, ENT_COMPAT, "UTF-8");
     $string = preg_replace('#(&\#*\w+)[\x00-\x20]+;#U', "$1;", $string);
     $string = preg_replace('#(<[^>]+[\s\r\n\"\'])(on|xmlns)[^>]*>#iU', "$1>", $string);

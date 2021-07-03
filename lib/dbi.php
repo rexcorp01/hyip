@@ -59,7 +59,7 @@ class HS2_DB
 	{
 		$this->last_query = $query;
 		$t = time();
-		$res = @mysqli_query($this->link, $query); // ??? mysql_unbuffered_query()
+		$res = @mysqli_query($this->link, $query); // ??? mysqli_unbuffered_query()
 		if (($t = abs(time() - $t)) >= 3)
 			xAddToLog("$t: $query", 'db');
 		return $res;

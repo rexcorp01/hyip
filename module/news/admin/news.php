@@ -31,11 +31,11 @@ try
         $a['nAnnounce']=htmlspecialchars($a['nAnnounce']);
         $a['nText']=FilterHTML($a['nText']);    
             
-        $a['nTopic']=mysql_real_escape_string($a['nTopic']);
-        $a['nAnnounce']=mysql_real_escape_string($a['nAnnounce']);
-        $a['nText']=mysql_real_escape_string($a['nText']);
-        $a['nDBegin']=mysql_real_escape_string($a['nDBegin']);
-        $a['nDEnd']=mysql_real_escape_string($a['nDEnd']);
+        $a['nTopic']=mysqli_real_escape_string($a['nTopic']);
+        $a['nAnnounce']=mysqli_real_escape_string($a['nAnnounce']);
+        $a['nText']=mysqli_real_escape_string($a['nText']);
+        $a['nDBegin']=mysqli_real_escape_string($a['nDBegin']);
+        $a['nDEnd']=mysqli_real_escape_string($a['nDEnd']);
 */
 		if ($id = $db->save($table, $a, 
 			'nDBegin, nDEnd, nTS, nTopic, nAttn, nAnnounce, nText', $id_field))

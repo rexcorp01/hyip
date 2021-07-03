@@ -1,9 +1,7 @@
 <?php
 
-if (function_exists('mysqli_connect'))
-	require_once('lib/dbi.php');
-else
-	require_once('lib/db.php');
+require_once('lib/dbi.php');
+
 $db = new HS2_DB();
 
 $k = md5($_GS['domain'] . $_cfg['sys_id']);
