@@ -39,7 +39,14 @@ if (isset_IN('bSave')) {
 	'db_login' => '" . addslashes(encode1(_IN('dbLogin'), $k, false, 1)) . "',
 	'db_pass' => '" . addslashes(encode1(_IN('dbPass'), $k, false, 2)) . "',
 	'db_type' => '" . addslashes(_IN('dbType')) . "'
-);"
+);
+
+DEFINE('DEBUG_MODE', false);
+
+DEFINE('DEBUG_LOG', true);
+
+DEFINE('DEBUG_DISPLAY', true);
+"
 		);
 		fclose($f);
 		require($fn);
