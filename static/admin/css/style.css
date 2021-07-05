@@ -192,7 +192,7 @@ header {
     margin-right: 10px;
 }
 .header_right a.close {
-    background: url(../img/ico/exit.png) no-repeat right center;
+    background: url(../images/ico/exit.png) no-repeat right center;
     padding: 0 12px 0 0;
 }
 .header_right a:hover {text-decoration: underline;}
@@ -300,7 +300,7 @@ div.content_white {
 .form_block_el_right input[type=checkbox] {}
 .form_block_el_right small {margin: 0 0 0 15px;}
 .form_block_el_right.date>input[type=text] {
-    background: url(../img/ico/calendar.png) no-repeat right center;
+    background: url(../images/ico/calendar.png) no-repeat right center;
     width: 250px;
 }
 
@@ -345,8 +345,8 @@ table.default tr td.buttons a {
     margin-left: 8px;
 }
 table.default tr td.buttons a:first-child {margin: 0;}
-table.default tr td.buttons a.ico-edit {background: url(../img/ico/edit.png) no-repeat left top;}
-table.default tr td.buttons a.ico-delete {background: url(../img/ico/close.png) no-repeat left top;}
+table.default tr td.buttons a.ico-edit {background: url(../images/ico/edit.png) no-repeat left top;}
+table.default tr td.buttons a.ico-delete {background: url(../images/ico/close.png) no-repeat left top;}
 table.default tr td.buttons a:hover {background-position: right top;}
 table.default tr td:last-child {padding-right: 20px;}
 
@@ -427,16 +427,16 @@ section.table_action input[type=submit] {
 }
 .stat-tools .ico:hover div {display: block;}
 .stat-tools .ico.ico-edit {
-    background: url(../img/ico/edit.png) no-repeat left top;
+    background: url(../images/ico/edit.png) no-repeat left top;
 }
 .stat-tools .ico.ico-edit:hover {
-    background: url(../img/ico/edit.png) no-repeat right top;
+    background: url(../images/ico/edit.png) no-repeat right top;
 }
 .stat-tools .ico.ico-rm {
-    background: url(../img/ico/close.png) no-repeat left top;
+    background: url(../images/ico/close.png) no-repeat left top;
 }
 .stat-tools .ico.ico-rm:hover {
-    background: url(../img/ico/close.png) no-repeat right top;
+    background: url(../images/ico/close.png) no-repeat right top;
 }
 .stat-tools .ico.ico-edit input[type=checkbox] {margin: 0 0 0 5px;}
 .stat-users {

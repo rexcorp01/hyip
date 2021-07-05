@@ -37,7 +37,7 @@
     height: 32px;
     overflow: hidden;
     cursor: pointer;
-    background: url(../img/ico/select_arrow.png) no-repeat center center;
+    background: url(../images/ico/select_arrow.png) no-repeat center center;
 }
 .selectBox-dropdown-menu {
     position: absolute;
@@ -64,32 +64,32 @@
 }
 
 .selectBox-dropdown-menu li.usd, .selectBox-label.usd {
-    background: url(../img/currency/dollar.svg) no-repeat 10px 9px;
+    background: url(../images/currency/dollar.svg) no-repeat 10px 9px;
     background-size: auto 12px;
     padding: 0 0 0 15px;
 }
 .selectBox-dropdown-menu li.eur, .selectBox-label.eur {
-    background: url(../img/currency/euro.svg) no-repeat 10px 9px;
+    background: url(../images/currency/euro.svg) no-repeat 10px 9px;
     background-size: auto 12px;
     padding: 0 0 0 15px;
 }
 .selectBox-dropdown-menu li.rub, .selectBox-label.rub {
-    background: url(../img/currency/rouble.svg) no-repeat 10px 9px;
+    background: url(../images/currency/rouble.svg) no-repeat 10px 9px;
     background-size: auto 12px;
     padding: 0 0 0 15px;
 }
 .selectBox-dropdown-menu li.btc, .selectBox-label.btc {
-    background: url(../img/currency/bitcoin.svg) no-repeat 10px 9px;
+    background: url(../images/currency/bitcoin.svg) no-repeat 10px 9px;
     background-size: auto 12px;
     padding: 0 0 0 15px;
 }
 .selectBox-dropdown-menu li.eth, .selectBox-label.eth {
-    background: url(../img/currency/ether.svg) no-repeat 10px 9px;
+    background: url(../images/currency/ether.svg) no-repeat 10px 9px;
     background-size: auto 12px;
     padding: 0 0 0 15px;
 }
 .selectBox-dropdown-menu li.xrp, .selectBox-label.xrp {
-    background: url(../img/currency/ripple.svg) no-repeat 10px 9px;
+    background: url(../images/currency/ripple.svg) no-repeat 10px 9px;
     background-size: auto 12px;
     padding: 0 0 0 15px;
 }

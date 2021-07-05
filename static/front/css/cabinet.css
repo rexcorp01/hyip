@@ -115,16 +115,16 @@ nav.menuCabinet a {
     color: #091a2a;
     font-size: 13px;
 }
-nav.menuCabinet a.cabinet {background: url(../img/cabinet/cabinet.png) no-repeat left center;}
-nav.menuCabinet a.settings {background: url(../img/cabinet/settings.png) no-repeat left center;}
-nav.menuCabinet a.operations {background: url(../img/cabinet/operation.png) no-repeat left center;}
-nav.menuCabinet a.deposits {background: url(../img/cabinet/deposit.png) no-repeat left center;}
-nav.menuCabinet a.messages {background: url(../img/cabinet/review.png) no-repeat left center;}
-nav.menuCabinet a.payment {background: url(../img/cabinet/payment.png) no-repeat left center;}
-nav.menuCabinet a.tickets {background: url(../img/cabinet/review.png) no-repeat left center;}
-nav.menuCabinet a.reffs {background: url(../img/cabinet/reffs.png) no-repeat left center;}
+nav.menuCabinet a.cabinet {background: url(../images/cabinet/cabinet.png) no-repeat left center;}
+nav.menuCabinet a.settings {background: url(../images/cabinet/settings.png) no-repeat left center;}
+nav.menuCabinet a.operations {background: url(../images/cabinet/operation.png) no-repeat left center;}
+nav.menuCabinet a.deposits {background: url(../images/cabinet/deposit.png) no-repeat left center;}
+nav.menuCabinet a.messages {background: url(../images/cabinet/review.png) no-repeat left center;}
+nav.menuCabinet a.payment {background: url(../images/cabinet/payment.png) no-repeat left center;}
+nav.menuCabinet a.tickets {background: url(../images/cabinet/review.png) no-repeat left center;}
+nav.menuCabinet a.reffs {background: url(../images/cabinet/reffs.png) no-repeat left center;}
 nav.menuCabinet a.calc {}
-nav.menuCabinet a.review {background: url(../img/cabinet/review.png) no-repeat left center;}
+nav.menuCabinet a.review {background: url(../images/cabinet/review.png) no-repeat left center;}
 nav.menuCabinet a:hover, nav.menuCabinet a.active {border-bottom: 4px solid #416b92;}
 
 
