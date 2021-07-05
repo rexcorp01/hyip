@@ -483,5 +483,4 @@
 	'Level'=>'Level',
 	'Fund'=>'Fund',
 	'Bonus'=>'Bonus'
-        )
-?>
+        );

@@ -659,5 +659,4 @@
 'ok_no' => 'No payment systems with API',
 		
         ''=>''
-        )
-?>
+        );

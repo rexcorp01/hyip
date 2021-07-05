@@ -189,7 +189,7 @@ if ($_smode < 2) // user mode
     $_GS['lang'] = getLang($_SESSION['_lang']); // lang
     $_GS['lang_dir'] = 'tpl/'; // tpl lang dir
 
-    $_TRANS = require_once('lib/trans/'.$_GS['lang'].'.php');
+    $_TRANS = require_once('languages/'.$_GS['lang'].'.php');
 
     setPage('_TRANS', $_TRANS, 0);
 
