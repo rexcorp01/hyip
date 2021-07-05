@@ -18,5 +18,3 @@ $list = opPageGet(_GETN('page'), 100, "Users LEFT JOIN AddInfo ON uID=auID",
 setPage('list', $list);
 
 showPage();
-
-?>

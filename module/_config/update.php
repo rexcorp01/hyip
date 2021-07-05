@@ -56,5 +56,3 @@ $db->replace('Cfg',
 }
 
 goToURL($_cfg['cfg_link'] . '?modules');
-
-?>

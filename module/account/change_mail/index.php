@@ -106,5 +106,3 @@ catch (Exception $e)
 
 $_GS['vmodule'] = 'account';
 showPage();
-
-?>

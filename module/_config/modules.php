@@ -9,5 +9,3 @@ include('module/_config/_header.php');
 <?php
 
 include('module/_config/_footer.php');
-
-?>

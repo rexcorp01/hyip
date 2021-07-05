@@ -1,10 +1,10 @@
 <?php
-namespace YandexMoney;
+namespace YooMoney;
 
 require_once __DIR__ . "/exceptions.php";
 
 class Config {
-    static $MONEY_URL = "https://money.yandex.ru";
+    static $MONEY_URL = "https://yoomoney.ru";
 }
 
 class BaseAPI {

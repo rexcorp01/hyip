@@ -36,5 +36,3 @@ $el['PAPI']['apipass'] = $access_token_response->access_token;
 $key = $el['cID'] . $el['cCID'] . stampToTime($el['cMTS']);
 if ($db->update('Currs', array('cParamsAPI' => encodeArrayToStr($el['PAPI'], $key, 3)), '', 'cID=?d', array($el['cID'])))
 	showInfo('Saved', moduleToLink('balance/admin/curr') . '?id=' . $el['cID']);
-
-?>

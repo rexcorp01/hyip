@@ -119,5 +119,3 @@ setPage('list', $list);
 setPage('list_balances', $list_balances);
 
 showPage();
-
-?>

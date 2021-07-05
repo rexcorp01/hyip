@@ -131,5 +131,3 @@ setPage('wfields', $wfields);
 setPage('wdata', $wdata);
 
 showPage();
-
-?>

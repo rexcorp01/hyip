@@ -1622,5 +1622,3 @@ function strToHex($string)
     }
     return $hex;
 }
-
-?>

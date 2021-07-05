@@ -87,5 +87,3 @@ if (!$_user['aGA'])
 }
 
 showPage();
-
-?>

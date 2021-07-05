@@ -175,5 +175,3 @@ $_oncron = array( // once in N minutes
 	'depo' => 1,
 	'sms' => 1
 );
-
-?>

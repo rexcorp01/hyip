@@ -12,5 +12,3 @@ $_GS['script'] = $f;
 	
 $_smode = 1;
 require($_GS['script']);
-
-?>

@@ -6,7 +6,6 @@ if (abs(chklic() - time()) > 1) exit;
 function getCIDs($cid = '')
 {
     $cids = array( // Name, Curr, Merchant, API, CurrID, DetectField
-//		'LR' => 	array('LibertyReserve',	'USD', 1, 1, 'LRUSD', 'lr_transfer'),
         'PM' => 	array('PerfectMoney', 	'USD', 1, 1, 'USD', 'itspm'),
         'PZ' => 	array('Payza',		 	'USD', 1, 1, 'USD', 'ap_referencenumber'),
 //		'EP' =>		array('EgoPay',			'USD', 1, 1, 'USD', 'product_id'),
@@ -25,14 +24,13 @@ function getCIDs($cid = '')
         'OKR' =>	array('OKPAYRUB',		'RUB', 1, 1, 'RUB', 'ok_txn_id'),
         'AC' =>		array('AdvancedCashUSD','USD', 1, 1, 'USD', 'ac_transfer'),
         'ACR' =>	array('AdvancedCashRUB','RUB', 1, 1, 'RUR', 'ac_transfer'),
-        //'HM' =>		array('HelixMoney24',	'USD', 1, 1, 'USD', 'paysystem_id'),
         //'PP' =>		array('PexPay',			'USD', 1, 1, 'USD', 'transacationID'),
         //'EGC' => 	array('EuroGoldCash',	'USD', 1, 1, '1', 'egc_transaction'),
         //'C4P' =>	array('Cash4Pay',		'USD', 1, 1, 'USD', 'transactionId'),
         'BW' => 	array('BankWire', 		'USD', 0, 0, 'USD', '?'),
         'SB' => 	array('SberBank', 		'RUB', 0, 0, 'RUB', '?'),
-        'YM' => 	array('YandexMoney', 	'RUB', 1, 1, 643, 'operation_id'),
-        'YMC' => 	array('YandexMoney (ccards)', 	'RUB', 1, 0, 643, 'operation_id'),
+        'YM' => 	array('YooMoney', 	'RUB', 1, 1, 643, 'operation_id'),
+        'YMC' => 	array('YooMoney (ccards)', 	'RUB', 1, 0, 643, 'operation_id'),
         'WM' => 	array('WebMoney', 		'USD', 1, 0, 'USD', 'LMI_PAYEE_PURSE'),
 //		'BCM' =>	array('Bitcoin',		'BTC', 0, 0, 'BTC', '?'),
 //		'BC' =>		array('Bitcoin',		'BTC', 1, 1, 'BTC', 'itsbtc'),
@@ -397,7 +395,7 @@ function getSCIFields($cid) { // private pay in/out info
         case 'YM':
             return array(
                 'acc' => 	array('Account number', '\d{13,16}', '410111222333444'),
-                'key' => 	array('Secret word <<https://sp-money.yandex.ru/myservices/online.xml>>'),
+                'key' => 	array('Secret word <<https://sp-yoomoney.ru/myservices/online.xml>>'),
                 '_url' => 	array('Status URL')
             );
         case 'WM':
@@ -653,7 +651,7 @@ function getAPIFields($cid) { // private pay in/out info
         case 'YMC':
         case 'YM':
             return array(
-                'id' => 		array('Client ID<br><a href="https://money.yandex.ru/myservices/new.xml">Add</a> application<br><<use "Redirect URI" = ' . FullURL(moduleToLink('balance/admin/ym_api_token')) . '>>'),
+                'id' => 		array('Client ID<br><a href="https://yoomoney.ru/myservices/new.xml">Add</a> application<br><<use "Redirect URI" = ' . FullURL(moduleToLink('balance/admin/ym_api_token')) . '>>'),
                 'secretpass'=> 	array('Client secret<br><<set "OAuth2 client_secret checking mode" checkbox>>'),
                 'apipass' =>	array('Access token<br>Fill Client ID and secret, save and <a href="' . moduleToLink('balance/admin/ym_api_token') . '">get token!</a>')
             );
@@ -906,7 +904,7 @@ function prepareSCI($cid, $params, $params2, $sum, $memo, $tag, $urlok, $urlfail
             return $r;
         case 'YMC':
             return array(
-                'url' => 'https://money.yandex.ru/quickpay/confirm.xml',
+                'url' => 'https://yoomoney.ru/quickpay/confirm.xml',
                 'receiver' => $params2['acc'],
                 'sum' => $sum,
                 'writable-sum' => 'false',
@@ -924,7 +922,7 @@ function prepareSCI($cid, $params, $params2, $sum, $memo, $tag, $urlok, $urlfail
             );
         case 'YM':
             /*		return array(
-			'url' => 'https://money.yandex.ru/embed/small.xml',
+			'url' => 'https://yoomoney.ru/embed/small.xml',
 			'uid' => $params['acc'],
 			'button-text' => '01',
 			'button-size' => 'l',
@@ -934,7 +932,7 @@ function prepareSCI($cid, $params, $params2, $sum, $memo, $tag, $urlok, $urlfail
 			'label' => $tag
 		);*/
             return array(
-                'url' => 'https://money.yandex.ru/quickpay/confirm.xml',
+                'url' => 'https://yoomoney.ru/quickpay/confirm.xml',
                 'receiver' => $params2['acc'],
                 'sum' => $sum,
                 'writable-sum' => 'false',
@@ -2819,7 +2817,7 @@ AVAILABLEBALANCE_1=53.94&CURRENCY_1=USD
             return $res;
         case 'YM':
             require_once("lib/yandexmoney/api.php");
-            $api = new YandexMoney\API($params['apipass']);
+            $api = new YooMoney\API($params['apipass']);
             $account_info = (array)$api->accountInfo();
             if (isset($account_info['balance']))
             {
@@ -3429,7 +3427,7 @@ as you would see it in your account history. One will be sent for each transacti
             return $res;
         case 'YM':
             require_once("lib/yandexmoney/api.php");
-            $api = new YandexMoney\API($fromparams['apipass']);
+            $api = new YooMoney\API($fromparams['apipass']);
             $request_payment = $api->requestPayment(array(
                 "pattern_id" => "p2p",
                 "to" => $toparams['acc'],
@@ -3890,5 +3888,3 @@ function psysOnCron($psys)
                 sendMailToAdmin('WalletBalanceLow', $c);
         }
 }
-
-?>

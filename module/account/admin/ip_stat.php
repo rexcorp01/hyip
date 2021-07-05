@@ -42,5 +42,3 @@ $ips=array_reverse($ips) ;
 setPage('list', $ips);
 
 showPage();
-
-?>

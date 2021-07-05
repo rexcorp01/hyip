@@ -34,5 +34,3 @@ $_SESSION['_go_after_login'] = _RQ('url');
 setPage('loginza_url', urlencode(fullURL(moduleToLink('account/loginza'))));
 
 showPage();
-
-?>

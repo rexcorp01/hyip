@@ -42,5 +42,3 @@ catch (Exception $e)
 }
 
 showPage();
-
-?>

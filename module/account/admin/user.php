@@ -76,4 +76,3 @@ if (!isset($_GET['add']))
 //	setPage('ips', $ips);
 }
 showPage();
-?>

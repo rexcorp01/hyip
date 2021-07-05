@@ -138,5 +138,3 @@ catch (Exception $e)
 }
 
 goToURL(moduleToLink('account/login'));
-	
-?>

@@ -27,5 +27,3 @@ function opChangeMailConfirm($uid, $params)
 	if (opChangeMail($uid, $params['mail']))
 		showInfo('Completed', moduleToLink('account/change_mail') . '?done');
 }
-
-?>
