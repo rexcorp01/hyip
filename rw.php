@@ -11,17 +11,7 @@ define('_TPL_DIR_', _ROOT_DIR_.'/tpl/');
 
 require_once _ROOT_DIR_.'/vendor/autoload.php';
 
-require_once _ROOT_DIR_.'/lib/main.php';
-
 require_once _ROOT_DIR_.'/_config.php';
-
-// Rewrite module
-
-$_GS['https'] = ($_GS['https'] || isset($_SERVER['HTTPS']) || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') == 'https'));
-$_GS['root_url'] = getRootURL($_GS['https']);
-$_GS['module_dir'] = 'module/';
-
-@include_once($_GS['module_dir'] . '_config.php');
 
 if (defined('DEBUG_MODE') && DEBUG_MODE) {
 
@@ -54,6 +44,16 @@ if (defined('DEBUG_MODE') && DEBUG_MODE) {
     
     error_reporting(0);
 }
+
+require_once _ROOT_DIR_.'/lib/main.php';
+
+// Rewrite module
+
+$_GS['https'] = ($_GS['https'] || isset($_SERVER['HTTPS']) || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') == 'https'));
+$_GS['root_url'] = getRootURL($_GS['https']);
+$_GS['module_dir'] = 'module/';
+
+@include_once($_GS['module_dir'] . '_config.php');
 
 function linkToModule($l)
 {
