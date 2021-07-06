@@ -745,24 +745,6 @@ function prepareSCI($cid, $params, $params2, $sum, $memo, $tag, $urlok, $urlfail
     if (($c[4] == 'USD') or ($c[4] == 'RUB') or ($c[4] == 'EUR'))
         $sum = number_format($sum, 2, '.', '');
     switch ($cid) {
-        case 'LR':
-            $r = array(
-                'url' => 'https://sci.libertyreserve.com',
-                'lr_acc_from' => valueIf($forcepayer, $userparams['acc']),
-                'lr_acc' => $params['acc'],
-                'lr_store' => $params2['store'],
-                'lr_amnt' => $sum,
-                'lr_currency' => $c[4],
-                'lr_comments' => $memo,
-                'lr_merchant_ref' => $tag,
-                'lr_success_url' => $urlok,
-                'lr_success_url_method' => 'POST',
-                'lr_fail_url' => $urlfail,
-                'lr_fail_url_method' => 'POST',
-                'lr_status_url_method' => 'POST'
-            );
-            if ($urlproc) $r['lr_status_url'] = $urlproc;
-            return $r;
         case 'PM':
             global $_GS;
             return array(
@@ -2508,69 +2490,6 @@ function getBalance($cid, $params) {
     $c = GetCIDs($cid);
     $uniqtag = time().rand(0, 1000);
     switch ($cid) {
-        case 'LR':
-            // Security Word:ID:Date UTC in YYYYMMDD format:Time UTC in HH format (only hours, not minutes).
-            // MySecWord:20121227175937:20121227:17
-            $token = implode(':', array($params['apipass'], $uniqtag, gmdate('Ymd:H')));
-            $req =
-                'id=' . $uniqtag .
-                '&account=' . $params['acc'] .
-                '&api=' . $params['apiname'] .
-                '&token=' . hash('sha256', $token);
-            $answ = inet_request('https://api2.libertyreserve.com/nvp/balance?' . $req);
-            @parse_str($answ, $res);
-            /*Array
-		(
-			[ID] => 1358274138323
-			[TIMESTAMP] => 2013-01-15 18:22:13
-			[STATUS] => Success
-			[USD] => 0.0700
-			[EURO] => 0.0000
-			[GOLD] => 0.0000
-		)*/
-            $res['answer'] = $answ;
-            if ($res['STATUS'] == 'Success')
-            {
-                $res['result'] = 'OK';
-                $res['sum'] = $res['USD'];
-            }
-            else
-                $res['result'] = $res['ERRORMESSAGE'];
-            return $res;
-        case 'LR0':
-            $req = hash('sha256', $params['apipass'].':'.gmdate('Ymd:H'));
-            $req = '<Auth><ApiName>'.$params['apiname'].'</ApiName><Token>'.$req.'</Token></Auth>';
-            $req = "<BalanceRequest id=\"$uniqtag\">$req<Balance>".
-                '<CurrencyId>'.$c[4].'</CurrencyId>'.
-                '<AccountId>'.$params['acc'].'</AccountId>'.
-                '</Balance></BalanceRequest>';
-            $answ = inet_request('https://api.libertyreserve.com/xml/balance.aspx?req='.urlencode($req));
-            if (!$answ) return $res;
-            $res['answer'] = $answ;
-            /*
-<BalanceResponse id="1307901139" date="2011-12-06 17:52:21"><Error>
-<Code>301</Code>
-<Text>Invalid data format</Text>
-<Description>CurrencyId element is empty or contains invalid data</Description>
-</Error></BalanceResponse>
-*/
-            if (preg_match_all('|<Error><Code>(.*)</Code><Text>(.*)</Text><Description>(.*)</|U', $answ, $w, PREG_SET_ORDER)) {
-                $res['result'] = $w[0][1].': '.$w[0][2];
-                if ($w[0][3]) $res['result'] .= ' ('.$w[0][3].')';
-                return $res;
-            }
-            /*
-<BalanceResponse id="1307903355" date="2011-12-06 18:29:18"><Balance>
-<CurrencyId>LRUSD</CurrencyId>
-<AccountId>U2762864</AccountId>
-<Date>2011-12-06 18:29:18</Date>
-<Value>16.0900</Value>
-</Balance></BalanceResponse>
-*/
-            if (!preg_match_all('|<Balance><CurrencyId>(.*)</.*<Value>(.*)</|U', $answ, $w, PREG_SET_ORDER)) break;
-            $res['result'] = 'OK';
-            $res['sum'] = $w[0][2];
-            return $res;
         case 'PM':
             $req = 'AccountID='.urlencode($params['id']).
                 '&PassPhrase='.urlencode($params['apipass']);
@@ -3023,88 +2942,6 @@ function sendMoney($cid, $fromparams, $toparams, $sum, $memo = '', $uniqtag = 0,
     if (!$uniqtag)
         $uniqtag = time().rand(0, 1000);
     switch ($cid) {
-        case 'LR':
-            // Security Word:ID:Reference:Payee:Currency:Amount:Date UTC in YYYYMMDD format:Time UTC in HH format (only hours, not minutes).
-            // MySecWord:20121227170733:Reference:U1234567:usd:10.00:20121227:17
-            $token = implode(':', array($fromparams['apipass'], $uniqtag, '', urlencode($toparams['acc']), 'usd', $sum, gmdate('Ymd:H')));
-            $req =
-                'id=' . $uniqtag .
-                '&account=' . $fromparams['acc'] .
-                '&api=' . $fromparams['apiname'] .
-                '&token=' . hash('sha256', $token) .
-                '&reference=' .
-                '&type=transfer' .
-                '&payee=' . urlencode($toparams['acc']) .
-                '&currency=usd' .
-                '&amount=' . $sum .
-                '&memo=' . urlencode(trim($memo)) .
-                '&private=false' .
-                '&purpose=service';
-            $answ = inet_request('https://api2.libertyreserve.com/nvp/transfer?' . $req);
-            @parse_str($answ, $res);
-            $res['answer'] = $answ;
-            if ($res['STATUS'] == 'Success')
-            {
-                $res['result'] = 'OK';
-                $res['batch'] = $res['BATCH'];
-            }
-            else
-                $res['result'] = $res['ERRORMESSAGE'];
-            return $res;
-        case 'LR0':
-            $req = hash('sha256', $fromparams['apipass'].':'.gmdate('Ymd:H'));
-            $req = '<Auth><ApiName>'.$fromparams['apiname'].'</ApiName><Token>'.$req.'</Token></Auth>';
-            $req = "<TransferRequest id=\"$uniqtag\">$req<Transfer>".
-                '<TransferId></TransferId>'.
-                '<TransferType>transfer</TransferType>'.
-                '<Payer>'.$fromparams['acc'].'</Payer>'.
-                '<Payee>'.strip_tags($toparams['acc']).'</Payee>'.
-                '<CurrencyId>'.$c[4].'</CurrencyId>'.
-                '<Amount>'.$sum.'</Amount>'.
-                '<Memo>'.strip_tags($memo).'</Memo>'.
-                '<Anonymous>False</Anonymous>'.
-                '</Transfer></TransferRequest>';
-            $answ = inet_request('https://api.libertyreserve.com/xml/transfer.aspx?req='.urlencode($req));
-            if (!$answ) return $res;
-            $res['answer'] = $answ;
-            /*
-<TransferResponse id="1308153643913" date="2011-15-06 16:00:43"><Error>
-<Code>301</Code>
-<Text>Invalid data format</Text>
-<Description>Payee element is empty or contains invalid data</Description>
-</Error></TransferResponse>
-*/
-            if (preg_match_all('|<Error><Code>(.*)</Code><Text>(.*)</Text><Description>(.*)</|U', $answ, $w, PREG_SET_ORDER)) {
-                $res['result'] = $w[0][1].': '.$w[0][2];
-                if ($w[0][3]) $res['result'] .= ' ('.$w[0][3].')';
-                return $res;
-            }
-            /*
-<TransferResponse id="1308155366850" date="2011-15-06 16:29:26"><Receipt>
-<ReceiptId>63417982</ReceiptId>
-<Date>2011-15-06 16:29:26</Date>
-<PayerName>InvestorJournal</PayerName>
-<PayeeName>Klubnika</PayeeName>
-<Amount>-0.0100</Amount>
-<Fee>0.0000</Fee>
-<ClosingBalance>16.0800</ClosingBalance>
-<Transfer>
-<TransferId></TransferId>
-<TransferType>transfer</TransferType>
-<Payer>U2762864</Payer>
-<Payee>U4269374</Payee>
-<CurrencyId>LRUSD</CurrencyId>
-<Amount>0.0100</Amount>
-<Memo>memotest</Memo>
-<Anonymous>False</Anonymous>
-<Source>API</Source>
-</Transfer>
-</Receipt></TransferResponse>
-*/
-            if (!preg_match_all('|<ReceiptId>(.*)</.*<PayeeName>(.*)</|U', $answ, $w, PREG_SET_ORDER)) break;
-            $res['result'] = 'OK'; // .$w[0][2]
-            $res['batch'] = $w[0][1];
-            return $res;
         case 'PM':
             $req = 'AccountID='.urlencode($fromparams['id']).
                 '&PassPhrase='.urlencode($fromparams['apipass']).

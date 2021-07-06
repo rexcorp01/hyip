@@ -1,15 +1,21 @@
 <?php
+global $_cfg;
+
+$_cfg = array();
+
 define('_ROOT_DIR_', realpath(dirname(__FILE__))); 
 
 define('_LOG_DIR_', _ROOT_DIR_.'/logs/');
 
 define('_TPL_DIR_', _ROOT_DIR_.'/tpl/');
 
-// Rewrite module
-
 require_once _ROOT_DIR_.'/vendor/autoload.php';
 
 require_once _ROOT_DIR_.'/lib/main.php';
+
+require_once _ROOT_DIR_.'/_config.php';
+
+// Rewrite module
 
 $_GS['https'] = ($_GS['https'] || isset($_SERVER['HTTPS']) || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') == 'https'));
 $_GS['root_url'] = getRootURL($_GS['https']);
@@ -99,12 +105,6 @@ function useLib($m = '')
 	}
 	require_once($f);
 }
-
-// Load config
-
-global $_cfg;
-$_cfg = array();
-@include_once('_config.php');
 
 // Process URI
 
