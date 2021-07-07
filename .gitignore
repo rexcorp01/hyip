@@ -11,6 +11,9 @@ composer.lock
 /upload/*
 !upload/.htaccess
 
+/vendor_prefixed/*
+!vendor_prefixed/.htaccess
+
 .DS_Store
 /.idea/
 /.codeception/_cache/
