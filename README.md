@@ -6,9 +6,9 @@ HS (HSCRIPT) - CMS for investment projects (HYIP), MLM, trust management (trust 
 Requirements
 ============
 
-* PHP >= 7.2
+* PHP >= 7.3
 
 Installation
 ============
 
-composer install
+composer install --no-dev
