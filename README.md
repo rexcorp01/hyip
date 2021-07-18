@@ -22,6 +22,12 @@ cd h-script
 composer install
 ```
 
+## Sponsor this project
+
+bitcoin: 3PsnpooUyz1ePJdANkhq6S9G6wneNvCAFw
+
+ethereum: 0xd927784cd35092d47eaa40847202934f2a885ffa
+
 ## License
 
 Copyright (c) 2011-2021 GitHub Inc.
