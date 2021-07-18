@@ -58,5 +58,3 @@ function smsCheck($ids) // array
 116: DEPRICATED SENDER	Запрещенное значение отправителя (from)	   
 117: ACCOUNT RESTRICTION	Ограничение тест-аккаунта, возможно больше 2-х номеров в пакете	 
 */
-	
-?>

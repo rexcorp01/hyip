@@ -49,12 +49,20 @@ try
            	setError('clcomis_wrong'); 
         }
 		$a['pDays'] = round(_INN('pPer') * _INN('pNPer') / 24);
+        
+        $fields = explode(', ', 'pHidden, pNoCalc, pGroup, pGroupReq, pMaxCount, pName, pDescr, pMin, pMax, pDays, pWDays, pPClndr, pPerc, pPer, pNPer, pMPer, pClPer, pClComis, pReturn, pBonus, pEnAdd, pMinAdd, pCompndMin, pCompndMax, pDPerc, pPPerc, pBonusDay');
+        
+        foreach ($fields as $i => $field) :
+            
+                if (!isset($a[$field])) {
+                    unset($fields[$i]);
+                }
+            
+        endforeach; 
                 
-		if ($id = $db->save($table, $a, 
-			'pHidden, pNoCalc, pGroup, pGroupReq, pMaxCount, pName, pDescr, pMin, pMax, pDays, pWDays, pPClndr, pPerc, pPer, pNPer, pMPer, pClPer, pClComis, pReturn, pBonus, pEnAdd, pMinAdd, pCompndMin, pCompndMax, pDPerc, pPPerc, pBonusDay', $id_field))
-            {
+		if ($id = $db->save($table, $a, implode(', ', $fields), $id_field)) {
                 showInfo('Saved', $out_link . "?id=$id");
-            }
+        }
 		showInfo('*Error');
 	}
 
@@ -73,5 +81,3 @@ if (!isset($_GET['add']))
 }
 
 showPage();
-
-?>

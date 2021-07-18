@@ -5,13 +5,14 @@
 
 {if $el}
 	<h2>{$_AT['User']} '{$el.aName}'</h2>
-	<a href="{$root_url}account/admin/user/addinfo?id={$el.uID}" class="button-gray">{$_AT['Additional']}</a>
+	<a href="{_link module='account/admin/user'}/addinfo?id={$el.uID}" class="button-gray">{$_AT['Additional']}</a>
 	<br><br>
 {else}
 	<h2>{$_AT['New user']}</h2>
 {/if}
 
 {$txt_login=valueIf($_cfg.Const_NoLogins, $_AT['e-mail'], $_AT['login'])}
+
 {include file='edit_admin.tpl'
 	fields=[
 		'uID'=>[],
@@ -71,15 +72,6 @@
 				$_AT['State'],
 				0,
 				$usr_statuses,
-				'skip'=>!$el
-			],
-		'uBTS'=>
-			[
-				'DT',
-				$_AT['Banned till'],
-				[
-					'bdate_empty'=>$_AT['input date']
-				],
 				'skip'=>!$el
 			],
 		'uLevel'=>
@@ -143,7 +135,19 @@
 	]
 	values=$el
 }
-{*
+
+		{*
+        'uBTS'=>
+			[
+				'DT',
+				$_AT['Banned till'],
+				[
+					'bdate_empty'=>$_AT['input date']
+				],
+				'skip'=>!$el
+			],
+        *}
+        {*
 		'uBal'=>
 			[
 				'X',
@@ -152,12 +156,12 @@
 				_z($el.uBal, 1),
 				'skip'=>!$el
 			],
-*}
+        *}
 {if $el}
 	<br>
 	<a href="{$root_url}admin/opers?user={$el.uLogin}" class="button-green">{$_AT['All user operations']}</a>&nbsp;
 	<a href="{$root_url}admin/message?add&to={$el.uLogin}" class="button-green">{$_AT['Send a message to the user']}</a>&nbsp;
-	<a href="{$root_url}account/admin/user?id={$el.uID}&login" class="button-green">{$_AT['Login as user']}</a><br>
+	<a href="{$root_url}admin/account/user?id={$el.uID}&login" class="button-green">{$_AT['Login as user']}</a><br>
 {/if}
 {include file='admin/admin/footer.tpl'}
 {/strip}

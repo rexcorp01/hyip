@@ -248,5 +248,3 @@ else
 }
 
 showPage();
-
-?>

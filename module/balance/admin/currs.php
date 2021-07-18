@@ -11,8 +11,8 @@ try
 
 	if (isset_IN('ids') and (count($ids = (array)_IN('ids')) > 0))
 	{
-		showInfo('*CantComplete');
-/*		$ids = $db->fetchRows($db->select($table, $id_field, '?# ?i', array($id_field, $ids)), 1);
+		//showInfo('*CantComplete');
+		$ids = $db->fetchRows($db->select($table, $id_field, '?# ?i', array($id_field, $ids)), 1);
 		if (count($ids) > 0)
 		{
 			checkFormSecurity();
@@ -20,13 +20,13 @@ try
 			if (sendedForm('del'))
 			{
 				// ??? chk Internal
-//				$db->delete($table, '?# ?i', array($id_field, $ids));
+				$db->delete($table, '?# ?i', array($id_field, $ids));
 			}
 			
 			showInfo();
 		}
 		else
-			showInfo('*NoSelected');*/
+			showInfo('*NoSelected');
 	}
 
 } 
@@ -47,5 +47,3 @@ foreach ($list as $id => $r)
 setPage('list', $list);
 
 showPage();
-
-?>

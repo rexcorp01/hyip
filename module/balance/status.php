@@ -57,5 +57,3 @@ sendMailToAdmin('AddFundsError2', array(
 	'error' => $err
 	)
 );
-
-?>

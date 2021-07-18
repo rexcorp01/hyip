@@ -9,8 +9,8 @@ $_rwlinks = array(
 	
 	// Admin panel
 	
-	'admin' => array('admin'),
-
+	'admin/admin' => array('admin'),
+    
     // Global setup
 
     'system/admin/setup_main' => array('admin/setup/main', 'admin' => '{!ru!}Настройки{!en!}Settings{!!}/{!ru!}Основные{!en!}Main'),

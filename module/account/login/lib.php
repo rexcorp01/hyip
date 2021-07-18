@@ -122,5 +122,3 @@ function opLoginConfirm($uid, $params)
 {
 	return opLogin($uid, $params['url'], true, false, $params['remember']);
 }
-
-?>

@@ -119,6 +119,7 @@ elseif ($l = moduleToLink('index'))
 		$f = $m[1];
 		$_GET['id'] = $m[2];
 	}
+    
 	$m = linkToModule($f);
 	if (!$m and ($f != $l))
 	{
@@ -137,13 +138,13 @@ elseif ($l = moduleToLink('index'))
 }
 else
 	$m = 'index';
-
+    
 if (!file_exists($f = $_GS['module_dir'] . $m . '/index.php'))
 	if (!file_exists($f = $_GS['module_dir'] . $m . '.php'))
 		xSysStop("Rewrite: Module '$m' not found");
 
 $_GS['module'] = $m; // account/login
-$_GS['vmodule'] = ($_rwlinks[$m]['admin'] ? 'admin' : $m);
+$_GS['vmodule'] = (isset($_rwlinks[$m]['admin']) ? 'admin' : $m);
 $_GS['script'] = $f; // module/account/login/*.php
 
 if ($m != '_config')

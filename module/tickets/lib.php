@@ -122,5 +122,3 @@ function ticketClose($creator, $tid)
 		'', 'tID=?', array($t['tID']));
 	return true;
 }
-
-?>

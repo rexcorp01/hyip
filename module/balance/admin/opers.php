@@ -239,5 +239,3 @@ foreach ($_currs2 as $id => $c)
 setPage('currs2', $currs2);
 
 showPage();
-
-?>

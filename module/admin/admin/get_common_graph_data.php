@@ -158,5 +158,3 @@
    setPage('gd_output_select',$gd_output_select);
    setPage('gd_reffs_select',$gd_reffs_select);
    setPage('defAction', 'get_common_graph_data');
-
-?>

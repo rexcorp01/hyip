@@ -247,5 +247,3 @@ function toTranslitURL($str)
     return trim($str, "-");	
 //	return iconv("UTF-8", "ISO-8859-1//TRANSLIT", $str)
 }
-
-?>

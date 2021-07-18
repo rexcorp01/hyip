@@ -46,7 +46,7 @@ function getLang($lang = '') // '' - current / '*' - default lang
 function getLangDir($lang = '')
 {
 	global $_GS;
-	$dir = 'tpl/';
+	$dir = 'languages/';
 	foreach (array(getLang($lang), $_GS['mode'], $_GS['theme']) as $d)
 		if (sEmpty($d))
 			break;
@@ -171,8 +171,19 @@ function sendedForm($btn = '', $form = '')
 	global $_IN;
 	$form = getFormName($form) . '_btn' . $btn;
     
-	if ($res = isset_IN($form));
-		unset($_IN[$form]);
+    $res = isset_IN($form);
+
+	if ($res && isset($_IN[$form])) {
+	   
+	   unset($_IN[$form]);
+       
+       $res = true;
+       
+	} else {
+	   
+	   $res = false;
+	}
+    
 	return $res;
 }
 
@@ -459,5 +470,3 @@ function tplFormSecurity($params, $tpl_page)
 }
 
 $tpl_page->registerPlugin('function', '_getFormSecurity', 'tplFormSecurity');
-
-?>

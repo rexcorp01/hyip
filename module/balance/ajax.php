@@ -73,5 +73,3 @@ try
 catch (Exception $e) 
 {
 }
-
-?>

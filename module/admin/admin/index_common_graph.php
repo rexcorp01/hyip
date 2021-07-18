@@ -153,5 +153,3 @@
    
    setPage('stats_list', $stats_list);    
    setPage('stats_total_list', $stats_total_list);      
-
-?>

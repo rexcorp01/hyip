@@ -13,4 +13,7 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
 RewriteRule !(.(gif|jpg|png|ico|swf|txt|js|css|zip|htc|ttf|eot|svg|woff))$ rw.php [L]

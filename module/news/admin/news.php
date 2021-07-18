@@ -37,8 +37,17 @@ try
         $a['nDBegin']=mysqli_real_escape_string($a['nDBegin']);
         $a['nDEnd']=mysqli_real_escape_string($a['nDEnd']);
 */
-		if ($id = $db->save($table, $a, 
-			'nDBegin, nDEnd, nTS, nTopic, nAttn, nAnnounce, nText', $id_field))
+        $fields = explode(', ', 'nDBegin, nDEnd, nTS, nTopic, nAttn, nAnnounce, nText');
+                
+        foreach ($fields as $i => $field) :
+            
+                if (!isset($a[$field])) {
+                    unset($fields[$i]);
+                }
+            
+        endforeach;    
+
+		if ($id = $db->save($table, $a, implode(', ', $fields), $id_field))
 			showInfo('Saved', $out_link . "?id=$id");
 		showInfo('*Error');
 	}
@@ -62,5 +71,3 @@ else
 	setPage('today', timeToStr(time(), 0));
 
 showPage();
-
-?>

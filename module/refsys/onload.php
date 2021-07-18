@@ -82,5 +82,3 @@ function onRefSysEvent($oper, $uid, $params)
 		return;
 	}
 }
-
-?>

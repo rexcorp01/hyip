@@ -47,5 +47,3 @@ stampTableToStr($list, 'mTS, bRTS', 2);
 setPage('list', $list);
 
 showPage();
-
-?>

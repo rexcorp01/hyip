@@ -21,5 +21,3 @@ function updateUserCounters()
 }
 
 define('AVATAR_DIR', 'upload/avatar/');
-
-?>

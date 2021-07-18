@@ -160,6 +160,7 @@ class HS2_DB
 			$p = '{(\?)([\?\#dfail%]?)|(\#)(\#|\!|[\w_]+)}';
 			$query = preg_replace_callback($p, array(&$this, '_parseParamCallback'), $query);
 //		}
+
         $qr = $this->_doQuery($query);
 		if ($qr === false)
 			xSysError($this->lastError());
@@ -350,5 +351,3 @@ class HS2_DB
 	}
 
 }
-
-?>

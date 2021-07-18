@@ -118,5 +118,3 @@ stampTableToStr($list, 'tTS, tLTS');
 setPage('list', $list);
 
 showPage();
-
-?>

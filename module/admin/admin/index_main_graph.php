@@ -213,5 +213,3 @@
     setPage('payment_system_select',$GraphMainOptions['payment_system_select']);
     setPage('currency_select',$GraphMainOptions['currency_select']);
     setPage('Graph',$GraphMainOptions['Graph']);
-
-?>

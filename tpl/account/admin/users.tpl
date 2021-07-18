@@ -53,7 +53,7 @@
 	btns=['setgroup'=>$_AT['Set group'], 'del'=>$_AT['Delete']]
 }
 
-<a href="{$root_url}account/admin/user?add" class="button-blue">{$_AT['Add user']}</a><br>
+<a href="{_link module='account/admin/user'}?add" class="button-blue">{$_AT['Add user']}</a><br>
 
 {include file='admin/admin/footer.tpl'}
 {/strip}

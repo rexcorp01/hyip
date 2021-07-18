@@ -18,7 +18,7 @@ try
 	if (sendedForm('', 'add')) 
 	{
 		checkFormSecurity('add');
-		
+
 		if (!($c = $cids[_IN('PSys')]))
 			setError('psys_not_selected', 'add');
 		if ($id = $db->insert('Currs', array('cCID' => _IN('PSys'), 'cCurrID' => $c[1], 'cName' => $c[0], 'cCurr' => $c[1])))
@@ -29,9 +29,11 @@ try
 	if (sendedForm()) 
 	{
 		checkFormSecurity();
-
-		if (($cid = _INN('cID')) and (_IN('cCID')))
-		{
+        
+        $cid = _INN('cID');
+         
+		if ($cid && _IN('cCID')) {
+		  
 			$a = $_IN;
 			opDecodeCurrParams($db->fetch1Row($db->select($table, '*', 'cID=?d', array($cid))), $p, $p_sci, $p_api);
 			$t = time();
@@ -43,14 +45,32 @@ try
 			$a['cParamsSCI'] = encodeArrayToStr($p_sci, $key, 2);
 			$a['cParamsAPI'] = encodeArrayToStr($p_api, $key, 3);
 			$a['cMTS'] = timeToStamp($t);
-			if ($id = $db->save($table, $a,
-				'cDisabled, cHidden, cName, cCurr, cNumDec, ' .
+            
+            $fields = explode(', ', 'cDisabled, cHidden, cName, cCurr, cNumDec, ' .
 				'cCASHINMode, cCASHINMin, cCASHINMax, cCASHINInt, cCASHINComis, cCASHINComisMin, cCASHINComisMax, ' .
-				'cCASHOUTMode, cCASHOUTMin, cCASHOUTMax, cCASHOUTInt, cCASHOUTComis, cCASHOUTComisMin, cCASHOUTComisMax, cCASHOUTLimitPer, cCASHOUTLimit, ' .
-				'cTRMode, cTRMin, cTRMax, cTRInt, cTRComis, cTRComisMin, cTRComisMax, ' .
-				'cParams, cParamsSCI, cParamsAPI, cMTS', $id_field))
-				showInfo('Saved', $out_link . "?id=$id");
-		}
+				'cCASHOUTMode, cCASHOUTMin, cCASHOUTMax, cCASHOUTInt, cCASHOUTComis, cCASHOUTComisMin, cCASHOUTComisMax, cCASHOUTLimitPer, cCASHOUTLimit, ' .				'cTRMode, cTRMin, cTRMax, cTRInt, cTRComis, cTRComisMin, cTRComisMax, ' .
+				'cParams, cParamsSCI, cParamsAPI, cMTS');
+                
+            foreach ($fields as $i => $field) :
+            
+                if (!isset($a[$field])) {
+                    unset($fields[$i]);
+                }
+            
+            endforeach; 
+            
+            if (!isset($a['cDisabled'])) {
+                $a['cDisabled'] = 0; $fields[] = 'cDisabled';
+            }
+            
+            if (!isset($a['cHidden'])) {
+                $a['cHidden'] = 0; $fields[] = 'cHidden';
+            }
+  
+			if ($id = $db->save($table, $a, implode(', ', $fields), $id_field)) {
+                    showInfo('Saved', $out_link . "?id=$id");
+			}
+		} 
 		showInfo('*Error');
 	}
 
@@ -90,5 +110,3 @@ else
 }
 
 showPage();
-
-?>

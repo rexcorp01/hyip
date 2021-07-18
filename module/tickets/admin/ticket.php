@@ -58,5 +58,3 @@ if (!isset($_GET['add']))
 }
 
 showPage();
-
-?>

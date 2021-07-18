@@ -11,5 +11,3 @@ function newsGetBlock($n = 0)
 	stampTableToStr($list, 'nTS', 0);
 	return $list;
 }
-
-?>

@@ -116,4 +116,3 @@ foreach ($_currs as $id => $r)
 setPage('clist', $list);
 setPage('today', timeToStr(time(), 1));
 showPage();
-?>

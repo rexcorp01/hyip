@@ -54,5 +54,3 @@ setPage('clist', $clist);
 setPage('list', $list);
 //xstop($list);
 showPage();
-
-?>

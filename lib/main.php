@@ -148,6 +148,7 @@ function _arr_val(&$arr, $p)
         return NULL;
     }
     if (preg_match("/(.+)\\[(.*)\\]/", $p, $a)) {
+
         return _arr_val($arr[$a[1]], $a[2]);
     }
     return $arr[$p] ?? false;
@@ -156,7 +157,10 @@ function _arr_val(&$arr, $p)
 function isset_IN($p = "btn")
 {
     global $_IN;
-    return !is_null(_arr_val($_IN, $p));
+    
+    $result = _arr_val($_IN, $p);
+
+    return ($result !== false && !is_null($result)) ? true : false;
 }
 
 function _IN($p, $mask = "")

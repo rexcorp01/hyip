@@ -48,5 +48,3 @@ stampTableToStr($list, 'oTS');
 setPage('list', $list);
 
 showPage();
-
-?>

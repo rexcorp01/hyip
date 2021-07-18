@@ -6,5 +6,3 @@ if (!$_cfg['UI_ShowIntro'])
 	goToURL(moduleToLink('index'));
 
 showPage();
-
-?>

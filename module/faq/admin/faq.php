@@ -24,8 +24,18 @@ try
 			setError('question_empty');
 		if (!$a['fAnswer'])
 			setError('answer_empty');
-		if ($id = $db->save($table, $a, 
-			'fHidden, fCTS, fCat, fOrder, fQuestion, fAnswer', $id_field))
+            
+        $fields = explode(', ', 'fHidden, fCTS, fCat, fOrder, fQuestion, fAnswer');
+                
+        foreach ($fields as $i => $field) :
+            
+                if (!isset($a[$field])) {
+                    unset($fields[$i]);
+                }
+            
+        endforeach;          
+   
+		if ($id = $db->save($table, $a, implode(', ', $fields), $id_field))
 			showInfo('Saved', $out_link . "?id=$id");
 		showInfo('*Error');
 	}
@@ -51,5 +61,3 @@ foreach ((array)$_cfg['FAQ__Cats'] as $c)
 setPage('cats', $cats);
 
 showPage();
-
-?>

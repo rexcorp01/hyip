@@ -129,20 +129,34 @@ function opRegisterPrepare($params, $from_admin = false)
 			if (_COOKIE('active'))
 				return 'multi_reg';
 	}
-
+    
 	$params['uState'] = 0;
 	$params['uLevel'] = 1;
 	$params['uLang'] = $_GS['lang'];
 	$params['uMode'] = $_GS['mode'];
 	$params['uTheme'] = $_GS['theme'];
     $params['aTZ'] = $_cfg['UI_DefaultTZ']*60;
-	$params['auID'] = $db->insert('Users', $params,
-		'uLogin, uPass, uMail, uState, uLevel, uLang, uMode, uTheme, uRef');
+	$params['auID'] = $db->insert('Users', $params, 'uLogin, uPass, uMail, uState, uLevel, uLang, uMode, uTheme, uRef, uGroup, uPass2, GraphMainOptions, GraphCommonOptions');
 	if (!$params['auID'])
 		return false;
 	$params['aCTS'] = timeToStamp();
 	$params['aCIP'] = $_GS['client_ip'];
-	$db->insert('AddInfo', $params, 'auID, aName, aCTS, aCIP, aSQuestion, aSAnswer, aCountry, aTel, aTZ, aDefCurr');
+    
+    $fields = explode(', ', 'auID, aName, aCTS, aCIP, aSQuestion, aSAnswer, aCountry, aTel, aTZ, aDefCurr');
+                
+   foreach ($fields as $i => $field) :
+            
+                if (!isset($params[$field])) {
+                    unset($fields[$i]);
+                }
+            
+    endforeach; 
+    
+    if (!isset($params['aBD'])) {
+        $params['aBD'] = 0;
+    }
+    
+	$db->insert('AddInfo', $params, implode(', ', $fields).', aOIDs, aBD, aCountry, aCity, aTel');
 	if (!$from_admin)
 	{
 		setcookie('active', $params['auID'], time() + 365 * HS2_UNIX_DAY, '/'); // mark 'registered'
@@ -231,5 +245,3 @@ function opRegisterConfirm($uid, $params)
 		showInfo('Completed', moduleToLink('account/register') . '?done');
 	}
 }
-
-?>

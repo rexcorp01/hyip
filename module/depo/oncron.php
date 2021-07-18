@@ -51,5 +51,3 @@ if ($_cfg['Depo_ShowStat'])
 	useLib('depo');
 	@file_put_contents('tpl_c/stat.dat', @serialize(depoGetStat()));
 }
-	
-?>

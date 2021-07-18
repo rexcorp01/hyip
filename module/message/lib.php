@@ -131,5 +131,3 @@ function sendMailToUser2($mail, $section, $consts = array(), $lang = '', $fname 
 		exValue($_cfg['Sys_NotifyMail'], $from)
 	);
 }
-
-?>

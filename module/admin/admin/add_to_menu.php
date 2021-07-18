@@ -68,5 +68,3 @@
   setPage('defAction', 'add_to_menu');
   setPage('admin_links', $admin_links);
   setPage('admin_links_list', $admin_links_list);
-
-?>

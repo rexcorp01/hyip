@@ -142,5 +142,3 @@
     header('Content-type: application/json');
     echo $jsonstring;
     exit();
-
-?>
