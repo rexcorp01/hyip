@@ -9,7 +9,7 @@
 					['index', $_TRANS['Main']],
 					['news', $_TRANS['News']],
 					['cabinet', $_TRANS['Cabinet'], 'skip'=>!_uid()],
-					['admin', $_TRANS['Control panel'], 'count'=>$count_aopers, 'skip'=>($user.uLevel < 90)]
+					['admin/admin', $_TRANS['Control panel'], 'count'=>$count_aopers, 'skip'=>($user.uLevel < 90)]
 				]
 			}
 		</td>

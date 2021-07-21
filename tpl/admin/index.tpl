@@ -1,57 +1,57 @@
-{if $defAction eq 'add_to_menu'}
+{if $defAction|default:'' eq 'add_to_menu'}
 
    {section name=i loop=$admin_links}
       <a href="javascript:void(0);" onclick="add_to_fav_menu('{$admin_links[i].url}', 1);"><img src="{$root_url}static/admin/img/star.png" alt=""/></a>  <a href="{_link module=$admin_links[i].url}">{$admin_links[i].name}</a>  {if !$smarty.section.i.last}<br />{/if}
    {/section}
 
- {elseif $defAction eq 'get_common_graph_data'}
+ {elseif $defAction|default:'' eq 'get_common_graph_data'}
 
-                  <div class="stat" id="gd-registration" {if $gd_registration_select ne 1}style="display: none;"{/if}>
+                  <div class="stat" id="gd-registration" {if $gd_registration_select|default:'' ne 1}style="display: none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-registration-day" value="1" onclick="change_day_profit('gd-registration');" checked/></div></i><i class="ico ico-rm" onclick="$('#gd-registration').slideUp();$('#gd_registration_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['Users']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_registration.total} <b id="gd-registration-day-data">+{$stats_total_list.gd_registration.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_registration.total|default:''} <b id="gd-registration-day-data">+{$stats_total_list.gd_registration.today|default:''}</b></div>
                     </div>
-                    <div id="gd-registration-data" class="stat-graph-container-registration" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_registration gt 0}{$item.gd_registration}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-registration-data" class="stat-graph-container-registration" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_registration|default:'' gt 0}{$item.gd_registration|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-accrual" {if $gd_accrual_select ne 1}style="display: none;"{/if}>
+                <div class="stat" id="gd-accrual" {if $gd_accrual_select|default:'' ne 1}style="display: none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-accrual-day" value="1" onclick="change_day_profit('gd-accrual');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-accrual').slideUp();$('#gd_accrual_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sAccrual']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_accrual.total} <b id="gd-accrual-day-data">+{$stats_total_list.gd_accrual.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_accrual.total|default:''} <b id="gd-accrual-day-data">+{$stats_total_list.gd_accrual.today|default:''}</b></div>
                     </div>
-                    <div id="gd-accrual-data" class="stat-graph-container-accrual" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_accrual gt 0}{$item.gd_accrual}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-accrual-data" class="stat-graph-container-accrual" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_accrual|default:'' gt 0}{$item.gd_accrual|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-deposit" {if $gd_deposit_select ne 1}style="display: none;"{/if}>
+                <div class="stat" id="gd-deposit" {if $gd_deposit_select|default:'' ne 1}style="display: none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-deposit-day" value="1" onclick="change_day_profit('gd-deposit');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-deposit').slideUp();$('#gd_deposit_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sDeposit']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_deposit.total} <b id="gd-deposit-day-data">+{$stats_total_list.gd_deposit.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_deposit.total|default:''} <b id="gd-deposit-day-data">+{$stats_total_list.gd_deposit.today|default:''}</b></div>
                     </div>
-                    <div id="gd-deposit-data" class="stat-graph-container-deposit" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_deposit gt 0}{$item.gd_deposit}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-deposit-data" class="stat-graph-container-deposit" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_deposit|default:'' gt 0}{$item.gd_deposit|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-contribution" {if $gd_contribution_select ne 1}style="display: none;"{/if}>
+                <div class="stat" id="gd-contribution" {if $gd_contribution_select|default:'' ne 1}style="display: none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-contribution-day" value="1" onclick="change_day_profit('gd-contribution');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-contribution').slideUp();$('#gd_contribution_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sContribution']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_contribution.total} <b id="gd-contribution-day-data">+{$stats_total_list.gd_contribution.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_contribution.total|default:''} <b id="gd-contribution-day-data">+{$stats_total_list.gd_contribution.today|default:''}</b></div>
                     </div>
-                    <div class="stat-graph-container-contribution" id="gd-contribution-data" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_contribution gt 0}{$item.gd_contribution}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div class="stat-graph-container-contribution" id="gd-contribution-data" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_contribution|default:'' gt 0}{$item.gd_contribution|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
                 <div class="stat" id="gd-withdraw" {if $gd_withdraw_select ne 1}style="display: none;"{/if}>
@@ -63,10 +63,10 @@
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
                         <div class="stat-users-nums">{$stats_total_list.gd_withdraw.total} <b id="gd-withdraw-day-data">+{$stats_total_list.gd_withdraw.today}</b></div>
                     </div>
-                    <div id="gd-withdraw-data" class="stat-graph-container-withdraw" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_withdraw gt 0}{$item.gd_withdraw}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-withdraw-data" class="stat-graph-container-withdraw" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_withdraw|default:'' gt 0}{$item.gd_withdraw|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-output" {if $gd_output_select ne 1}style="display: none;"{/if}>
+                <div class="stat" id="gd-output" {if $gd_output_select|default:'' ne 1}style="display: none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-output-day" value="1"  onclick="change_day_profit('gd-output');" checked/></div></i><i class="ico ico-rm" onclick="$('#gd-output').slideUp();$('#gd_output_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
@@ -75,17 +75,17 @@
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
                         <div class="stat-users-nums">{$stats_total_list.gd_output.total} <b id="gd-output-day-data">+{$stats_total_list.gd_output.today}</b></div>
                     </div>
-                    <div id="gd-output-data" class="stat-graph-container-output" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_output gt 0}{$item.gd_output}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-output-data" class="stat-graph-container-output" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_output|default:'' gt 0}{$item.gd_output|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-reffs" {if $gd_reffs_select ne 1}style="display: none;"{/if}>
+                <div class="stat" id="gd-reffs" {if $gd_reffs_select|default:'' ne 1}style="display: none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-reffs-day" value="1"   onclick="change_day_profit('gd-reffs');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-reffs').slideUp();$('#gd_reffs_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sReffs']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_reffs.total} <b id="gd-reffs-day-data">+{$stats_total_list.gd_reffs.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_reffs.total|default:''} <b id="gd-reffs-day-data">+{$stats_total_list.gd_reffs.today|default:''}</b></div>
                     </div>
                     <div id="gd-reffs-data" class="stat-graph-container-reffs" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_reffs gt 0}{$item.gd_reffs}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
@@ -299,43 +299,43 @@
                         <span>+</span>
                         <div class="cap-plus-list">
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[deposit]" id="graph_deposit" value="1" {if $Graph.deposit eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[deposit]" id="graph_deposit" value="1" {if $Graph.deposit|default:'' eq 1}checked{/if}/>
                                 <label for=""class="deposit"><span></span>{$_AT['sDeposit']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[bonus]" id="graph_bonus" value="1" {if $Graph.bonus eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[bonus]" id="graph_bonus" value="1" {if $Graph.bonus|default:'' eq 1}checked{/if}/>
                                 <label for="" class="bonus"><span></span>Бонус</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[fine]" id="graph_fine" value="1" {if $Graph.fine eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[fine]" id="graph_fine" value="1" {if $Graph.fine|default:'' eq 1}checked{/if}/>
                                 <label for="" class="fine"><span></span>Штраф</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[reffs]" id="graph_reffs" value="1" {if $Graph.reffs eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[reffs]" id="graph_reffs" value="1" {if $Graph.reffs|default:'' eq 1}checked{/if}/>
                                 <label for="" class="reffs"><span></span>{$_AT['sReffs']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[contribution]" id="graph_contribution" value="1"  {if $Graph.contribution eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[contribution]" id="graph_contribution" value="1"  {if $Graph.contribution|default:'' eq 1}checked{/if}/>
                                 <label for="" class="contribution"><span></span>{$_AT['sContribution']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[withdraw]" id="graph_withdraw" value="1"  {if $Graph.withdraw eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[withdraw]" id="graph_withdraw" value="1"  {if $Graph.withdraw|default:'' eq 1}checked{/if}/>
                                 <label for="" class="withdraw"><span></span>{$_AT['sWithdraw']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[accrual]" id="graph_accrual" value="1"  {if $Graph.accrual eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[accrual]" id="graph_accrual" value="1"  {if $Graph.accrual|default:'' eq 1}checked{/if}/>
                                 <label for="" class="accrual"><span></span>{$_AT['sAccrual']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[write]" id="graph_write" value="1"  {if $Graph.write eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[write]" id="graph_write" value="1"  {if $Graph.write|default:'' eq 1}checked{/if}/>
                                 <label for="" class="write"><span></span>{$_AT['Calcout']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[wait]" id="graph_wait" value="1"  {if $Graph.wait eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[wait]" id="graph_wait" value="1"  {if $Graph.wait|default:'' eq 1}checked{/if}/>
                                 <label for="" class="wait"><span></span>{$_AT['Pending']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[output]" id="graph_output" value="1"  {if $Graph.output eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[output]" id="graph_output" value="1"  {if $Graph.output|default:'' eq 1}checked{/if}/>
                                 <label for="" class="output"><span></span>{$_AT['sOutput']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
@@ -343,7 +343,7 @@
                                 <label for="" class="deposit_balance"><span></span>{$_AT['sContribution with balance']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[active_deposit]" id="graph_active_deposit" value="1"  {if $Graph.active_deposit eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[active_deposit]" id="graph_active_deposit" value="1"  {if $Graph.active_deposit|default:'' eq 1}checked{/if}/>
                                 <label for="" class="active_deposit"><span></span>{$_AT['sActive deposits']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
@@ -351,96 +351,96 @@
                                 <label for="" class="output"><span></span>{$_AT['sBalance (available)']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[busy_balance]" id="graph_busy_balance" value="1"  {if $Graph.graph_busy_balance eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[busy_balance]" id="graph_busy_balance" value="1"  {if $Graph.graph_busy_balance|default:'' eq 1}checked{/if}/>
                                 <label for="" class="busy_balance"><span></span>{$_AT['sBalance (occupied)']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[wait_balance]" id="graph_wait_balance" value="1"  {if $Graph.wait_balance eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[wait_balance]" id="graph_wait_balance" value="1"  {if $Graph.wait_balance|default:'' eq 1}checked{/if}/>
                                 <label for="" class="wait_balance"><span></span>{$_AT['sBalance (pending)']}</label>
                             </div>
                             <div class="cap-plus-list-el cfix">
-                                <input type="checkbox" name="Graph[reg]" id="graph_reg" value="1"  {if $Graph.reg eq 1}checked{/if}/>
+                                <input type="checkbox" name="Graph[reg]" id="graph_reg" value="1"  {if $Graph.reg|default:'' eq 1}checked{/if}/>
                                 <label for="" class="reg"><span></span>{$_AT['sRegistration']}</label>
                             </div>
                         </div>
                     </div>
                     <div class="cap-elements cfix">
-                      {if $Graph.deposit eq 1}
+                      {if $Graph.deposit|default:'' eq 1}
                         <div class="cap-elements-el cfix">
                            <label class="deposit" for=""><span></span>{$_AT['sDeposit']}</label>
                         </div>
                       {/if}
-                      {if $Graph.bonus eq 1}
+                      {if $Graph.bonus|default:'' eq 1}
                         <div class="cap-elements-el cfix">
                            <label class="bonus" for=""><span></span>{$_AT['sBonus']}</label>
                         </div>
                       {/if}
-                      {if $Graph.fine eq 1}
+                      {if $Graph.fine|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                          <label class="fine" for=""><span></span>{$_AT['sPenalty']}</label>
                       </div>
                       {/if}
-                      {if $Graph.reffs eq 1}
+                      {if $Graph.reffs|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="reffs" for=""><span></span>{$_AT['sReffs']}</label>
                       </div>
                       {/if}
-                      {if $Graph.contribution eq 1}
+                      {if $Graph.contribution|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="contribution" for=""><span></span>{$_AT['sContribution']}</label>
                       </div>
                       {/if}
-                      {if $Graph.withdraw eq 1}
+                      {if $Graph.withdraw|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="withdraw" for=""><span></span>{$_AT['sWithdraw']}</label>
                       </div>
                       {/if}
-                      {if $Graph.accrual eq 1}
+                      {if $Graph.accrual|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="accrual" for=""><span></span>{$_AT['sAccrual']}</label>
                       </div>
                       {/if}
-                      {if $Graph.write eq 1}
+                      {if $Graph.write|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="write" for=""><span></span>{$_AT['sWrite']}</label>
                       </div>
                       {/if}
-                      {if $Graph.wait eq 1}
+                      {if $Graph.wait|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="wait" for=""><span></span>{$_AT['sWait']}</label>
                       </div>
                       {/if}
-                      {if $Graph.output eq 1}
+                      {if $Graph.output|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="output" for=""><span></span>{$_AT['sOutput']}</label>
                       </div>
                       {/if}
-                      {if $Graph.deposit_balance eq 1}
+                      {if $Graph.deposit_balance|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="deposit_balance" for=""><span></span>{$_AT['sContribution with balance']}</label>
                       </div>
                       {/if}
-                      {if $Graph.active_deposit eq 1}
+                      {if $Graph.active_deposit|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="active_deposit" for=""><span></span>{$_AT['sActive deposits']}</label>
                       </div>
                       {/if}
-                      {if $Graph.available_balance eq 1}
+                      {if $Graph.available_balance|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="available_balance" for=""><span></span>{$_AT['sBalance (available)']}</label>
                       </div>
                       {/if}
-                      {if $Graph.busy_balance eq 1}
+                      {if $Graph.busy_balance|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="busy_balance" for=""><span></span>{$_AT['sBalance (occupied)']}</label>
                       </div>
                       {/if}
-                      {if $Graph.wait_balance eq 1}
+                      {if $Graph.wait_balance|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="wait_balance" for=""><span></span>{$_AT['sBalance (pending)']}</label>
                       </div>
                       {/if}
-                      {if $Graph.reg eq 1}
+                      {if $Graph.reg|default:'' eq 1}
                       <div class="cap-elements-el cfix">
                         <label class="reg" for=""><span></span>{$_AT['sRegistration']}</label>
                       </div>
@@ -470,31 +470,31 @@
                         <span>+</span>
                         <div class="cdp-plus-list">
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[registration]" data-id="gd-registration" id="gd_registration_select" value="1" {if $gd_registration_select eq 1}checked="checked"{/if}>
+                                <input type="checkbox" name="GraphDefault[registration]" data-id="gd-registration" id="gd_registration_select" value="1" {if $gd_registration_select|default:'' eq 1}checked="checked"{/if}>
                                 <label for=""><span></span>{$_AT['sRegistration']}</label>
                             </div>
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[accrual]" data-id="gd-accrual"  value="1" id="gd_accrual_select" {if $gd_accrual_select eq 1}checked="checked"{/if}/>
+                                <input type="checkbox" name="GraphDefault[accrual]" data-id="gd-accrual"  value="1" id="gd_accrual_select" {if $gd_accrual_select|default:'' eq 1}checked="checked"{/if}/>
                                 <label for=""><span></span>{$_AT['sAccrual']}</label>
                             </div>
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[deposit]" data-id="gd-deposit" value="1" id="gd_deposit_select" {if $gd_deposit_select eq 1}checked="checked"{/if}/>
+                                <input type="checkbox" name="GraphDefault[deposit]" data-id="gd-deposit" value="1" id="gd_deposit_select" {if $gd_deposit_select|default:'' eq 1}checked="checked"{/if}/>
                                 <label for=""><span></span>{$_AT['sDeposit']}</label>
                             </div>
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[contribution]" data-id="gd-contribution" value="1" id="gd_contribution_select" {if $gd_contribution_select eq 1}checked="checked"{/if}/>
+                                <input type="checkbox" name="GraphDefault[contribution]" data-id="gd-contribution" value="1" id="gd_contribution_select" {if $gd_contribution_select|default:'' eq 1}checked="checked"{/if}/>
                                 <label for=""><span></span>{$_AT['sContribution']}</label>
                             </div>
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[withdraw]" data-id="gd-withdraw" value="1" id="gd_withdraw_select" {if $gd_withdraw_select eq 1}checked="checked"{/if}/>
+                                <input type="checkbox" name="GraphDefault[withdraw]" data-id="gd-withdraw" value="1" id="gd_withdraw_select" {if $gd_withdraw_select|default:'' eq 1}checked="checked"{/if}/>
                                 <label for=""><span></span>{$_AT['sWithdraw']}</label>
                             </div>
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[output]" data-id="gd-output" value="1" id="gd_output_select" {if $gd_output_select eq 1}checked="checked"{/if}/>
+                                <input type="checkbox" name="GraphDefault[output]" data-id="gd-output" value="1" id="gd_output_select" {if $gd_output_select|default:'' eq 1}checked="checked"{/if}/>
                                 <label for=""><span></span>{$_AT['sOutput']}</label>
                             </div>
                             <div class="cdp-plus-list-el cfix">
-                                <input type="checkbox" name="GraphDefault[reffs]" data-id="gd-reffs" value="1" id="gd_reffs_select" {if $gd_reffs_select eq 1}checked="checked"{/if}/>
+                                <input type="checkbox" name="GraphDefault[reffs]" data-id="gd-reffs" value="1" id="gd_reffs_select" {if $gd_reffs_select|default:'' eq 1}checked="checked"{/if}/>
                                 <label for=""><span></span>{$_AT['sReffs']}</label>
                             </div>
                         </div>
@@ -505,52 +505,52 @@
                 <div style="clear:both"></div>
 
                 <div id="common_graphs_data">
-                   <div class="stat" id="gd-registration" {if $gd_registration_select ne 1}style="display:none;"{/if}>
+                   <div class="stat" id="gd-registration" {if $gd_registration_select|default:'' ne 1}style="display:none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-registration-day" value="1" onclick="change_day_profit('gd-registration');" checked/></div></i><i class="ico ico-rm" onclick="$('#gd-registration').slideUp(); $('#gd_registration_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['Users']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_registration.total} <b id="gd-registration-day-data">+{$stats_total_list.gd_registration.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_registration.total|default:''} <b id="gd-registration-day-data">+{$stats_total_list.gd_registration.today}</b></div>
                     </div>
-                    <div id="gd-registration-data" class="stat-graph-container-registration" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_registration gt 0}{$item.gd_registration}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-registration-data" class="stat-graph-container-registration" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_registration|default:'' gt 0}{$item.gd_registration|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-accrual"  {if $gd_accrual_select ne 1}style="display:none;"{/if}>
+                <div class="stat" id="gd-accrual"  {if $gd_accrual_select|default:'' ne 1}style="display:none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-accrual-day" value="1" onclick="change_day_profit('gd-accrual');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-accrual').slideUp(); $('#gd_accrual_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sAccrual']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_accrual.total} <b id="gd-accrual-day-data">+{$stats_total_list.gd_accrual.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_accrual.total|default:''} <b id="gd-accrual-day-data">+{$stats_total_list.gd_accrual.today|default:''}</b></div>
                     </div>
-                    <div id="gd-accrual-data" class="stat-graph-container-accrual" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_accrual gt 0}{$item.gd_accrual}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-accrual-data" class="stat-graph-container-accrual" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_accrual|default:'' gt 0}{$item.gd_accrual|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-deposit" {if $gd_deposit_select ne 1}style="display:none;"{/if}>
+                <div class="stat" id="gd-deposit" {if $gd_deposit_select|default:'' ne 1}style="display:none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-deposit-day" value="1" onclick="change_day_profit('gd-deposit');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-deposit').slideUp(); $('#gd_deposit_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sDeposit']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_deposit.total} <b id="gd-deposit-day-data">+{$stats_total_list.gd_deposit.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_deposit.total|default:''} <b id="gd-deposit-day-data">+{$stats_total_list.gd_deposit.today|default:''}</b></div>
                     </div>
-                    <div id="gd-deposit-data" class="stat-graph-container-deposit" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_deposit gt 0}{$item.gd_deposit}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div id="gd-deposit-data" class="stat-graph-container-deposit" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_deposit|default:'' gt 0}{$item.gd_deposit|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
-                <div class="stat" id="gd-contribution" {if $gd_contribution_select ne 1}style="display:none;"{/if}>
+                <div class="stat" id="gd-contribution" {if $gd_contribution_select|default:'' ne 1}style="display:none;"{/if}>
                     <div class="stat-tools">
                         <i class="ico ico-edit"><div>{$_AT['Show growth per day']} <input type="checkbox" id="gd-contribution-day" value="1" onclick="change_day_profit('gd-contribution');"  checked/></div></i><i class="ico ico-rm" onclick="$('#gd-contribution').slideUp(); $('#gd_contribution_select').prop('checked', false);get_common_graph_data();"></i>
                     </div>
                     <div class="stat-users">
                         <div class="stat-nums-users-label"><b>{$_AT['sContribution']}</b></div>
                         <div class="stat-nums-users-label">{$_AT['Quantity']}</div>
-                        <div class="stat-users-nums">{$stats_total_list.gd_contribution.total} <b id="gd-contribution-day-data">+{$stats_total_list.gd_contribution.today}</b></div>
+                        <div class="stat-users-nums">{$stats_total_list.gd_contribution.total|default:''} <b id="gd-contribution-day-data">+{$stats_total_list.gd_contribution.today|default:''}</b></div>
                     </div>
-                    <div class="stat-graph-container-contribution" id="gd-contribution-data" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_contribution gt 0}{$item.gd_contribution}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
+                    <div class="stat-graph-container-contribution" id="gd-contribution-data" data-source='[{foreach key=key item=item from=$stats_list name=outer}{literal}{{/literal}"date": "{$smarty.foreach.outer.iteration}","val": "{if $item.gd_contribution|default:'' gt 0}{$item.gd_contribution|default:''}{else}0{/if}"{literal}}{/literal}{if !$smarty.foreach.outer.last},{/if}{/foreach}]'></div>
                 </div>
 
                 <div class="stat" id="gd-withdraw" {if $gd_withdraw_select ne 1}style="display:none;"{/if}>

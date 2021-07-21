@@ -1,4 +1,6 @@
 <?php
+$_auth = 90;
+require_once('module/auth.php');
 
 $module = 'Sec';
 setPage('via_https', $_GS['https']);
