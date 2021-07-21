@@ -87,12 +87,12 @@ function setPage($par, $val, $conv = 3)
 function showPage($templ = '', $module = false, $exit_after = true)
 {
 	global $tpl_page, $tpl_errors, $_IN, $_GS, $_DF, $_cfg;
-
+    
 	if ($module === false)
 		$module = $_GS['module'];
 	setPage('tpl_module', $module);
 	setPage('tpl_vmodule', $_GS['vmodule']);
-
+    
 	if (file_exists(_ROOT_DIR_.'/'.$_GS['module_dir'] . $module . '.php')) {
 	   
 		$t = cutElemR($module, '/');
@@ -102,9 +102,16 @@ function showPage($templ = '', $module = false, $exit_after = true)
 	else
 		if (!$templ)
 			$templ = 'index';
+            
+            
+            
 	setPage('tpl_name', $templ);
 	$templ = $module . '/' . $templ;
     
+    if (strpos($_GS['uri'], 'admin/') !== false || $_GS['uri'] == 'admin') {
+        $templ = str_replace('admin/', '', $templ);
+    } 
+        
 	setPage('tpl_filename', $templ);
 	loadDateFormat($lang);
 	setPage('InputDateFormatLong', trim($_DF[$lang][3]));
@@ -113,7 +120,8 @@ function showPage($templ = '', $module = false, $exit_after = true)
 	setPage('_IN', $_IN);
 	setPage('tpl_info', getInfoData('*'));
 	setPage('tpl_errors', $tpl_errors);
-	$tpl_page->template_dir = $_GS['lang_dir'];
+	$tpl_page->template_dir = $_GS['lang_dir']. ( (strpos($_GS['uri'], 'admin/') === false && $_GS['uri'] != 'admin') ? 'front/default/' : 'admin/' );
+    
 	if (abs(chklic(5) - time()) > 1) exit;
 	if ($_cfg['Sys_ForceCharset'])
 		header("Content-Type: text/html; charset=utf-8");
