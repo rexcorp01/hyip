@@ -60,7 +60,6 @@ $_rwlinks = array(
     'balance/admin/opers' => array('admin/opers', 'admin' => '{!ru!}Баланс{!en!}Balance{!!}/{!ru!}Операции{!en!}Operations'),
     'balance/admin/oper' => array('admin/oper', 'admin' => '{!ru!}Баланс{!en!}Balance{!!}/-'),
     'balance/admin/setup' => array('admin/balance/setup', 'admin' => '{!ru!}Баланс{!en!}Balance{!!}/{!ru!}Настройки{!en!}Settings'),
-    'balance/admin/keeper' => array('admin/keeper', 'admin' => '{!ru!}Баланс{!en!}Balance{!!}/{!ru!}Онлайн keeper{!en!}Online keeper'),
     'balance/admin/ym_api_token' => array('admin/balance/ym_api_token'),
 
     // Ref. system
