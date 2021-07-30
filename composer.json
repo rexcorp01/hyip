@@ -20,7 +20,7 @@
      	"phpmailer/phpmailer" : "*",
      	"ckeditor/ckeditor": "4.*",
      	"smarty-gettext/smarty-gettext" : "*",
-	"sonata-project/google-authenticator" : "dev-master"
+	    "sonata-project/google-authenticator" : "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "3.*",

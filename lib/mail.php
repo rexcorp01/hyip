@@ -31,7 +31,7 @@ function sendMail0($to, $subj, $message, $from = '', $fromname = '')
 function sendMail($to, $subj, $message, $from = '', $fromname = '') 
 {
 	global $_GS,$_cfg;
-
+    
 	$_GS['mail_password'] = $_cfg['Mail_Password'];
 
 	if (!$_GS['mail_password'])
@@ -49,23 +49,24 @@ function sendMail($to, $subj, $message, $from = '', $fromname = '')
 		$fromname = $_cfg['Sys_SiteName'];
 
 	$mail = new PHPMailer();
+    
+    if (isset($_cfg['Mail_Host']) && isset($_cfg['Mail_Port']) && isset($_cfg['Mail_Username']) && isset($_cfg['Mail_Password']) && $_cfg['Mail_Host'] != '' && $_cfg['Mail_Port'] != '' && $_cfg['Mail_Username'] != '' && $_cfg['Mail_Password'] != ''){
 
-	$mail->IsSMTP();
-	$mail->SMTPAuth = true;
-	$mail->SMTPSecure = valueIf($_cfg['Mail_Secure'], "ssl");
+	   $mail->IsSMTP();
+	   $mail->SMTPAuth = true;
+	   $mail->SMTPSecure = valueIf($_cfg['Mail_Secure'], "ssl");
 
-	$mail->Host =  $_cfg['Mail_Host'];
-	$mail->Port = $_cfg['Mail_Port'];
+	   $mail->Host =  $_cfg['Mail_Host'];
+	   $mail->Port = $_cfg['Mail_Port'];
 
-	$mail->Username = $_cfg['Mail_Username'];  // username
-	$mail->Password = $_cfg['Mail_Password']; // password
+	   $mail->Username = $_cfg['Mail_Username'];  // username
+	   $mail->Password = $_cfg['Mail_Password']; // password
+    }
 
 	$mail->From = $from;
 	$mail->FromName = $fromname;
 	$mail->Subject = $subj;
-//	$mail->AltBody = "This is the body when user views in plain text format";
-//	$mail->WordWrap = 50; // set word wrap
-
+    
 	$mail->MsgHTML($message);
 
 	$mail->AddReplyTo($from, $fromname);
@@ -79,5 +80,3 @@ function sendMail($to, $subj, $message, $from = '', $fromname = '')
 		xAddToLog('PHP-Mailer error: ' . $mail->ErrorInfo);
 	return $res;
 }
-
-?>
