@@ -54,16 +54,43 @@ try
 		$ga = '';
 		if ($gacode = trim($a['GACode']))
 		{
-			require_once('module/account/ga/class.GoogleAuthenticator.php');
-			$ga = new GoogleAuthenticator();
+		  
+			$ga = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
+
 			if (!$ga->checkCode(exValue($a['GAKey'], $_user['aGA']), $gacode))
 				setError('ga_wrong');
 			$a['aGA'] = valueIf($_user['aGA'], '', $a['GAKey']);
 			$ga = 'aGA, ';
 		}
-		$db->update('AddInfo', $a, 
-			valueIf($_cfg['Account_UseName'] == 2, 'aName, ') . $f . $ga .
-			'aTZ, aIPSec, aSessIP, aSessUniq, aTimeOut, aNoMail, aNeedReConfig', 'auID=?d', array(_uid()));
+        
+        $db->insert('AddInfo',
+		              array(
+			                 'auID' => _uid(),
+			                 'aIPSec' => 4,
+                             'aName' => '',
+                             'aCTS' => 0,
+                             'aCIP' => '',
+                             'aOIDs' => '',
+                             'aBD' => 0,
+                             'aCountry' => '',
+                             'aCity' => '',
+                             'aTel' => '',
+                             'aSessIP' => 0
+		                  )
+	    );
+        
+        $fields = explode(', ', valueIf($_cfg['Account_UseName'] == 2, 'aName, ') . $f . $ga . 'aTZ, aIPSec, aSessIP, aSessUniq, aTimeOut, aNoMail, aNeedReConfig');
+                
+        foreach ($fields as $i => $field) :
+            
+                if (!isset($a[$field])) {
+                    unset($fields[$i]);
+                }
+            
+        endforeach; 
+
+		$db->update('AddInfo', $a, 	implode(', ', $fields), 'auID=?d', array(_uid()));
+    
 		showInfo('Saved');
 	}
 
@@ -78,12 +105,11 @@ setPage('utz', sprintf("%+02d:%02d", floor($_user['aTZ'] / 60), abs($_user['aTZ'
 
 if (!$_user['aGA'])
 {
-	require_once('module/account/ga/class.GoogleAuthenticator.php');
-	$ga = new GoogleAuthenticator();
+	$ga = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
 	if (!$_SESSION['GANewCode'])
 		$_SESSION['GANewCode'] = $ga->generateSecret();
 	setPage('GACode', $_SESSION['GANewCode']);
-	setPage('GAQR', $ga->getQRUrl($_user['uLogin'] . '@' . $_GS['domain'], $_SESSION['GANewCode']));
+	setPage('GAQR', \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($_user['uLogin'] . '@' . $_GS['domain'], $_SESSION['GANewCode']));
 }
 
 showPage();

@@ -43,5 +43,3 @@ function inet_lasturl() {
 	global $ch;
 	return curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 }
-
-?>

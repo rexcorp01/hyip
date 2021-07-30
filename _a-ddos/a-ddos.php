@@ -1,5 +1,4 @@
 <?php
-
 $keyfield = 'a-ddos';
 $askfreq = 1000000;
 
@@ -28,5 +27,3 @@ if (($_SESSION['a-ddos'] < 0) and ((count($_POST) == 0) or ($_SESSION['a-ddos'] 
 	echo($h);
 	exit;
 }
-
-?>

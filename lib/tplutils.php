@@ -3,17 +3,19 @@
 global $tpl_page, $tpl_errors;
 
 $tpl_page = new Smarty;
-$tpl_page->compile_check = true;
-$tpl_page->caching = false;
-$tpl_page->debugging = false;
 $tpl_page->compile_dir = 'tpl_c';
 $tpl_page->template_dir = 'tpl';
-$tpl_page->force_compile = false;
+$tpl_page->caching = false;
+$tpl_page->debugging = false;
 
-if (!DEBUG_MODE) {
-   $tpl_page->error_unassigned = false;
+if (defined('DEBUG_MODE') && DEBUG_MODE) {
+    $tpl_page->compile_check = true;
+    $tpl_page->debugging_ctrl = 'URL';
+    $tpl_page->force_compile = true;
 } else {
-   $tpl_page->debugging_ctrl = 'URL';
+    $tpl_page->compile_check = false;
+    $tpl_page->error_unassigned = false;
+    $tpl_page->force_compile = false;
 }
 
 $tpl_errors = array();
@@ -297,7 +299,7 @@ function loadDateFormat(&$lang)
 	if (isset($_DF[$lang]))
 		return;
 	//$df = getLangDir($lang) . 'date.lng';
-	$df = 'tpl/date_'.$lang.'.lng';
+	$df = 'languages/date_'.$lang.'.lng';
 	if (file_exists($df))
 	{
 		$a = @file($df);

@@ -11,8 +11,7 @@ function opLoginPrepare($login, $pass)
 	if ($a = $db->fetch1Row($db->select('Users LEFT JOIN AddInfo ON auID=uID', 
 		'uID, uLogin, aGA', 'uLogin=? and aGA<>""', array($login))))
 	{
-		require_once('module/account/ga/class.GoogleAuthenticator.php');
-		$ga = new GoogleAuthenticator();
+		$ga = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
 		if ($ga->checkCode($a['aGA'], $pass))
 			$usr = $a;
 		else

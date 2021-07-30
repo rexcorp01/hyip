@@ -58,6 +58,7 @@ class HS2_DB
 	function _doQuery($query)
 	{
 		$this->last_query = $query;
+
 		$t = time();
 		$res = @mysqli_query($this->link, $query); // ??? mysqli_unbuffered_query()
 		if (($t = abs(time() - $t)) >= 3)
@@ -244,7 +245,7 @@ class HS2_DB
 		if (count($fields_and_values) == 0) 
 			return 0;
 		return $this->query(
-			($as_replace ? 'REPLACE' : 'INSERT') . " INTO $table (?#) VALUES (?a)",
+			($as_replace ? 'REPLACE' : 'INSERT IGNORE ') . " INTO $table (?#) VALUES (?a)",
 			array(array_keys($fields_and_values), array_values($fields_and_values))
 		);
 	}
